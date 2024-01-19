@@ -1,0 +1,181 @@
+@import "variables";
+
+.my-account {
+  width: 50%;
+
+  &--edit {
+    width: 100%;
+  }
+
+  &__heading {
+    font-family: $font-family-secondary;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 48px;
+    margin-bottom: 26px;
+  }
+
+  &__form {
+    width: 100%;
+    padding: 32px;
+    border-radius: $border-radius-m;
+
+    &--edit {
+      width: 50%;
+      box-shadow: $shadow-xs;
+    }
+  }
+
+  &__image {
+    width: 160px;
+    height: 160px;
+    flex-shrink: 0;
+    background: $color-primary-200;
+    overflow: hidden;
+    border-radius: $border-radius-l;
+  }
+
+  &__status-input-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__status-icon {
+    &--active {
+      color: $color-tertiary3-500;
+    }
+
+    &--inactive {
+      color: $color-danger-500;
+    }
+  }
+
+  &__row {
+    display: flex;
+
+    &--status {
+      gap: 24px;
+      margin-bottom: 44px;
+    }
+  }
+
+  &__upload-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+
+    h3 {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22px;
+      color: $color-neutral-900;
+    }
+    p {
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 20px;
+      color: $color-neutral-600;
+    }
+  }
+
+  &__image-buttons {
+    height: 32px;
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+  }
+
+  &__controls-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+
+    &--slider {
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+    }
+  }
+
+  &__label {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 30px;
+  }
+
+  &__control {
+    height: 44px;
+    padding: 0 16px;
+    font-size: 16px;
+    line-height: 26px;
+    background: $color-neutral-200;
+    border-radius: $border-radius-m;
+    border-width: 0px;
+    outline: none;
+    width: 100%;
+
+    &.ng-invalid.ng-touched {
+      border: 1px solid $color-danger-500;
+    }
+
+    &:read-only {
+      height: 30px;
+      padding: 0;
+      background: $color-white;
+    }
+
+    &--status-active {
+      color: $color-tertiary3-500;
+    }
+
+    &--status-inactive {
+      color: $color-danger-500;
+    }
+  }
+
+  &__buttons {
+    margin-top: 44px;
+    display: flex;
+    gap: 32px;
+
+    &--edit {
+      margin-top: 72px;
+      width: 100%;
+      justify-content: center;
+      gap: 14px;
+    }
+  }
+
+  &__button {
+    height: 44px;
+  }
+
+  @media (max-width: $screen-md) {
+    width: 100%;
+
+    &__form {
+      &--edit {
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: $screen-sm) {
+    &__buttons {
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    &__button {
+      width: fit-content;
+    }
+  }
+}
