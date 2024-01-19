@@ -1,1 +1,59 @@
-<p>table works!</p>
+<table mat-table [dataSource]="dataSource" class="table">
+  <ng-container matColumnDef="date">
+    <th class="table__header-cell" mat-header-cell *matHeaderCellDef>DATE</th>
+    <td class="table__cell" mat-cell *matCellDef="let element">
+      {{ element.date | customDate }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="trainingName">
+    <th class="table__header-cell" mat-header-cell *matHeaderCellDef>
+      TRAINING NAME
+    </th>
+    <td
+      class="table__cell table__cell--training-name"
+      mat-cell
+      *matCellDef="let element"
+    >
+      {{ element.trainingName }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="type">
+    <th class="table__header-cell" mat-header-cell *matHeaderCellDef>TYPE</th>
+    <td class="table__cell" mat-cell *matCellDef="let element">
+      <span class="table__type-cell">
+        {{ element.type | capitalizeFirst }}
+      </span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th class="table__header-cell" mat-header-cell *matHeaderCellDef>
+      {{ studentView ? "TRAINER NAME" : "STUDENT NAME" }}
+    </th>
+    <td class="table__cell" mat-cell *matCellDef="let element">
+      {{ element.name }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="duration">
+    <th class="table__header-cell" mat-header-cell *matHeaderCellDef>
+      DURATION
+    </th>
+    <td class="table__cell" mat-cell *matCellDef="let element">
+      {{ element.duration }}
+    </td>
+  </ng-container>
+
+  <tr
+    class="table__header-row"
+    mat-header-row
+    *matHeaderRowDef="displayedColumns"
+  ></tr>
+  <tr
+    class="table__row"
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+  ></tr>
+</table>
