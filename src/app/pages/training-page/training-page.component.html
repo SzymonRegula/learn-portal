@@ -1,1 +1,5 @@
-<p>training-page works!</p>
+<div class="trainig-page">
+  <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
+  <app-table></app-table>
+  <app-date-picker (rangeChange)="onRangeChange($event)"></app-date-picker>
+</div>

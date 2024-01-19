@@ -1,0 +1,17 @@
+@import "variables";
+
+.my-account-page {
+  margin: 48px auto 132px auto;
+  width: 90%;
+  max-width: $screen-lg;
+
+  &__heading {
+    margin-bottom: 80px;
+    font-family: $font-family-secondary;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 78px;
+    color: $color-neutral-900;
+    text-align: center;
+  }
+}

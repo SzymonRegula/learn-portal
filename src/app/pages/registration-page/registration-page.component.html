@@ -1,1 +1,5 @@
-<p>registration-page works!</p>
+<div class="registration-page">
+  <h1 class="registration-page__heading">Registration</h1>
+  <p class="registration-page__role">{{ role | capitalizeFirst }}</p>
+  <app-registration-form [role]="role"></app-registration-form>
+</div>

@@ -1,1 +1,15 @@
-<p>join-us-page works!</p>
+<div class="join-us-page">
+  <h1 class="join-us-page__heading">Join Us</h1>
+  <app-join-us-box
+    class="join-us-page__box"
+    role="trainer"
+    [description]="trainerDescription"
+  >
+  </app-join-us-box>
+  <app-join-us-box
+    class="join-us-page__box"
+    role="student"
+    [description]="studentDescription"
+  >
+  </app-join-us-box>
+</div>
