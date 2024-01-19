@@ -1,0 +1,45 @@
+<div class="mini-profile">
+  <div class="mini-profile__user">
+    <img
+      class="mini-profile__avatar"
+      [src]="user.imageSrc"
+      alt="user's avatar"
+    />
+    <div class="mini-profile__data">
+      <p class="mini-profile__username">{{ user.username }}</p>
+      <p class="mini-profile__email">{{ user.email }}</p>
+    </div>
+  </div>
+
+  <hr class="mini-profile__line" />
+
+  <div class="mini-profile__actions">
+    <a
+      class="mini-profile__action mini-profile__action--my-account"
+      routerLink="/my-account"
+    >
+      <fa-icon
+        class="mini-profile__icon"
+        [icon]="accountIcon"
+        size="xl"
+      ></fa-icon>
+      <span>My Account</span>
+    </a>
+
+    <div class="mini-profile__action mini-profile__action--night-mode">
+      <fa-icon class="mini-profile__icon" [icon]="moonIcon" size="xl"></fa-icon>
+      <span>Night mode</span>
+      <mat-slide-toggle
+        class="mini-profile__switch"
+        hideIcon="true"
+      ></mat-slide-toggle>
+    </div>
+  </div>
+
+  <hr class="mini-profile__line" />
+
+  <button (click)="onLogout()" class="mini-profile__logout-btn" type="button">
+    <fa-icon [icon]="logoutIcon"></fa-icon>
+    <span>Sign out</span>
+  </button>
+</div>
