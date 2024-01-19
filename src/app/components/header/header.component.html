@@ -1,1 +1,37 @@
-<p>header works!</p>
+<div class="header">
+  <app-logo class="header__logo"> </app-logo>
+  <app-navigation class="header__nav"></app-navigation>
+  @if (logged ) { @if (miniProfileOpen) {
+  <app-mini-profile
+    class="header__mini-profile"
+    (appOutsideClick)="toggleMiniProfile()"
+  ></app-mini-profile>
+  }@else {
+  <button
+    type="button"
+    class="header__user"
+    (click)="toggleMiniProfile(); $event.stopPropagation()"
+  >
+    <span class="header__username">{{ user.username }}</span>
+    <img
+      class="header__user-avatar"
+      [src]="user.imageSrc"
+      alt="user's avatar"
+    />
+  </button>
+
+  } }@else {
+  <div class="header__buttons">
+    <app-button
+      class="header__button"
+      type="button"
+      styleType="prime-transparent"
+      routerLink="/login"
+      >Sign in</app-button
+    >
+    <app-button class="header__button" type="button" routerLink="/join-us">
+      Join us</app-button
+    >
+  </div>
+  }
+</div>
