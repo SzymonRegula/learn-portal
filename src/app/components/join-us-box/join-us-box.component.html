@@ -1,1 +1,22 @@
-<p>join-us-box works!</p>
+<div class="join-us-box">
+  <div class="join-us-box__container">
+    <div class="join-us-box__text">
+      <h2 class="join-us-box__heading">
+        Register as {{ role | capitalizeFirst }}
+      </h2>
+      <p class="join-us-box__description">
+        {{ description }}
+      </p>
+    </div>
+    <app-button
+      class="join-us-box__button"
+      [routerLink]="['/registration', role]"
+      >Join Us</app-button
+    >
+  </div>
+  <img
+    class="join-us-box__image"
+    [src]="imageSrc"
+    alt="group of happy people"
+  />
+</div>
