@@ -1,0 +1,10 @@
+@import "variables";
+
+::ng-deep .mat-calendar-table-header span {
+  color: $color-primary-500;
+}
+
+::ng-deep .mdc-button__label {
+  font-family: $font-family-secondary;
+  font-weight: 700;
+}
