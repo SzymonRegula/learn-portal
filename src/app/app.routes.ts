@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 export const routes: Routes = [
   {
@@ -37,11 +38,18 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'registration',
+    path: 'registration/:role',
     loadComponent: () =>
       import('./pages/registration-page/registration-page.component').then(
         (m) => m.RegistrationPageComponent
       ),
+  },
+  {
+    path: 'registration-verification',
+    loadComponent: () =>
+      import(
+        './pages/registration-verification-page/registration-verification-page.component'
+      ).then((m) => m.RegistrationVerificationPageComponent),
   },
   {
     path: 'training',
@@ -51,5 +59,5 @@ export const routes: Routes = [
       ),
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'home' },
+  { path: '**', component: NotFoundPageComponent },
 ];
