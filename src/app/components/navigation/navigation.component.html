@@ -1,1 +1,62 @@
-<p>navigation works!</p>
+<nav class="navigation">
+  @if (menuOpen) {
+  <aside class="navigation__opened-mobile">
+    <div class="navigation__user">
+      <img
+        src="assets/avatar-john.jpg"
+        alt="username profile picture"
+        class="navigation__avatar"
+      />
+      <div>
+        <p class="navigation__username">{{ username }}</p>
+        <p class="navigation__email">{{ email }}</p>
+      </div>
+      <fa-icon
+        class="navigation__close-icon"
+        [icon]="closeMenuIcon"
+        size="xl"
+        (click)="toggleMenu()"
+      ></fa-icon>
+    </div>
+    <ul class="navigation__mobile-menu">
+      <li class="navigation__mobile-menu-item">
+        <a routerLink="/blog" routerLinkActive="active">Blog</a>
+      </li>
+      <li class="navigation__mobile-menu-item">
+        <a routerLink="/pricing" routerLinkActive="active">Pricing</a>
+      </li>
+      <li class="navigation__mobile-menu-item">
+        <a routerLink="/about-us" routerLinkActive="active">About Us</a>
+      </li>
+      <li class="navigation__mobile-menu-item">
+        <a routerLink="/my-account" routerLinkActive="active">My Account</a>
+      </li>
+    </ul>
+    <button (click)="onLogout()" class="navigation__logout-btn" type="button">
+      <fa-icon [icon]="logoutIcon"></fa-icon>
+      <span>Sign out</span>
+    </button>
+  </aside>
+  } @else {
+  <div class="navigation__heading">
+    <fa-icon
+      class="navigation__burger-icon"
+      [icon]="burgerMenuIcon"
+      size="xl"
+      (click)="toggleMenu()"
+    ></fa-icon>
+    <app-logo></app-logo>
+  </div>
+  }
+  <ul class="navigation__menu">
+    <li class="navigation__menu-item">
+      <a routerLink="/blog" routerLinkActive="active">Blog</a>
+    </li>
+    <li class="navigation__menu-item">
+      <a routerLink="/pricing" routerLinkActive="active">Pricing</a>
+    </li>
+    <li class="navigation__menu-item">
+      <a routerLink="/about-us" routerLinkActive="active">About Us</a>
+    </li>
+  </ul>
+</nav>
