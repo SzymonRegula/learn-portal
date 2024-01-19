@@ -1,1 +1,95 @@
-<p>footer works!</p>
+<footer class="footer">
+  <div class="footer__row">
+    <app-logo class="footer__logo"></app-logo>
+    <nav class="footer__nav">
+      <h3 class="footer__heading">Product</h3>
+      <ul>
+        <li class="footer__nav-item">
+          <a routerLink="/features">Features</a>
+        </li>
+        <li class="footer__nav-item">
+          <a routerLink="/pricing">Pricing</a>
+        </li>
+      </ul>
+    </nav>
+    <nav class="footer__nav">
+      <h3 class="footer__heading">Resources</h3>
+      <ul>
+        <li class="footer__nav-item">
+          <a routerLink="/blog">Blog</a>
+        </li>
+        <li class="footer__nav-item">
+          <a routerLink="/user-guides">User guides</a>
+        </li>
+        <li class="footer__nav-item">
+          <a routerLink="/webinars">Webinars</a>
+        </li>
+      </ul>
+    </nav>
+    <nav class="footer__nav">
+      <h3 class="footer__heading">Company</h3>
+      <ul>
+        <li class="footer__nav-item">
+          <a routerLink="/about-us">About us</a>
+        </li>
+        <li class="footer__nav-item">
+          <a routerLink="/contact">Contact us</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="footer__subscription">
+      <div>
+        <h3 class="footer__heading footer__heading--primary">
+          Subscribe to our newsletter
+        </h3>
+        <p class="footer__subscription-text">
+          For product announcements and exclusive insigths
+        </p>
+      </div>
+      <form (ngSubmit)="onSubscribe(email)">
+        <div class="footer__input-container">
+          <label for="email">
+            <fa-icon [icon]="emailIcon" class="footer__email-icon"></fa-icon>
+          </label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Input your email"
+            ngModel
+            name="email"
+            required
+            #email="ngModel"
+          />
+        </div>
+        <app-button type="submit" [customStyle]="subBtnCustomStyle"
+          >Subscribe</app-button
+        >
+      </form>
+    </div>
+  </div>
+  <hr class="footer__line" />
+  <div class="footer__row footer__row--align-center">
+    <select class="footer__language-selector" name="language" id="language">
+      <option value="english">English</option>
+      <option value="polish">Polish</option>
+    </select>
+    <div class="footer__text">
+      <span>© 2024 Learn, Inc. </span>
+      <span> · </span>
+      <a routerLink="/privacy">Privacy </a>
+      <span> · </span>
+      <a routerLink="/terms">Terms</a>
+    </div>
+    <div class="footer__social-media">
+      <a href="https://twitter.com" target="_blank">
+        <fa-icon class="footer__social-media-icon" [icon]="xIcon"></fa-icon>
+      </a>
+      <a href="https://www.facebook.com" target="_blank">
+        <fa-icon class="footer__social-media-icon" [icon]="fbIcon"></fa-icon>
+      </a>
+      <a href="https://www.youtube.com" target="_blank">
+        <fa-icon class="footer__social-media-icon" [icon]="ytIcon"></fa-icon>
+      </a>
+    </div>
+  </div>
+</footer>
