@@ -1,0 +1,23 @@
+@import "variables";
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__breadcrumb {
+    font-family: $font-family-secondary;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    color: $color-primary-500;
+
+    &--active {
+      color: $color-neutral-900;
+    }
+  }
+
+  &__icon {
+    color: $color-neutral-650;
+  }
+}

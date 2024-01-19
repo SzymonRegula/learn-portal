@@ -1,1 +1,12 @@
-<p>breadcrumbs works!</p>
+<div class="breadcrumbs">
+  @for (breadcrumb of breadcrumbs; track $index) {
+  <a
+    class="breadcrumbs__breadcrumb"
+    [routerLink]="breadcrumb.url"
+    routerLinkActive="breadcrumbs__breadcrumb--active"
+    >{{ breadcrumb.text }}</a
+  >
+  @if ($index < breadcrumbs.length - 1) {
+  <fa-icon class="breadcrumbs__icon" [icon]="arrowIcon"></fa-icon>
+  } }
+</div>
