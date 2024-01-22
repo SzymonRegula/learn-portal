@@ -1,63 +1,65 @@
 import { Routes } from '@angular/router';
+import { ChangePasswordPageComponent } from './pages/change-password-page/change-password-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { JoinUsPageComponent } from './pages/join-us-page/join-us-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { MyAccountPageComponent } from './pages/my-account-page/my-account-page.component';
+import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
+import { RegistrationVerificationPageComponent } from './pages/registration-verification-page/registration-verification-page.component';
+import { TrainingPageComponent } from './pages/training-page/training-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { TrainingAddPageComponent } from './pages/training-add-page/training-add-page.component';
 
 export const routes: Routes = [
   {
     path: 'change-password',
-    loadComponent: () =>
-      import(
-        './pages/change-password-page/change-password-page.component'
-      ).then((m) => m.ChangePasswordPageComponent),
+    title: 'Change password',
+    component: ChangePasswordPageComponent,
   },
   {
     path: 'home',
-    loadComponent: () =>
-      import('./pages/home-page/home-page.component').then(
-        (m) => m.HomePageComponent
-      ),
+    title: 'Home',
+    component: HomePageComponent,
   },
   {
     path: 'join-us',
-    loadComponent: () =>
-      import('./pages/join-us-page/join-us-page.component').then(
-        (m) => m.JoinUsPageComponent
-      ),
+    title: 'Join us',
+    component: JoinUsPageComponent,
   },
   {
     path: 'login',
-    loadComponent: () =>
-      import('./pages/login-page/login-page.component').then(
-        (m) => m.LoginPageComponent
-      ),
+    title: 'Login',
+    component: LoginPageComponent,
   },
   {
     path: 'my-account',
-    loadComponent: () =>
-      import('./pages/my-account-page/my-account-page.component').then(
-        (m) => m.MyAccountPageComponent
-      ),
+    title: 'My account',
+    component: MyAccountPageComponent,
   },
   {
     path: 'registration/:role',
-    loadComponent: () =>
-      import('./pages/registration-page/registration-page.component').then(
-        (m) => m.RegistrationPageComponent
-      ),
+    title: 'Registration',
+    component: RegistrationPageComponent,
   },
   {
     path: 'registration-verification',
-    loadComponent: () =>
-      import(
-        './pages/registration-verification-page/registration-verification-page.component'
-      ).then((m) => m.RegistrationVerificationPageComponent),
+    title: 'Registration verification',
+    component: RegistrationVerificationPageComponent,
   },
   {
     path: 'training',
-    loadComponent: () =>
-      import('./pages/training-page/training-page.component').then(
-        (m) => m.TrainingPageComponent
-      ),
+    title: 'Training',
+    component: TrainingPageComponent,
+  },
+  {
+    path: 'add-training',
+    title: 'Add training',
+    component: TrainingAddPageComponent,
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', component: NotFoundPageComponent },
+  {
+    path: '**',
+    title: 'Not found',
+    component: NotFoundPageComponent,
+  },
 ];
