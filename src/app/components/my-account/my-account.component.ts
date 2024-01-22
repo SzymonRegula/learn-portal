@@ -19,6 +19,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CustomDateService } from '../../services/custom-date.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalBoxComponent } from '../modal-box/modal-box.component';
+import { RouterLink } from '@angular/router';
 
 interface ProfileData {
   image: string;
@@ -43,6 +44,7 @@ interface ProfileData {
     ButtonComponent,
     MatSlideToggleModule,
     ModalBoxComponent,
+    RouterLink,
   ],
   templateUrl: './my-account.component.html',
   styleUrl: './my-account.component.scss',
