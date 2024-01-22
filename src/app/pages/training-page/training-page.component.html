@@ -1,5 +1,9 @@
 <div class="trainig-page">
   <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
+  <h1 lass="trainig-page__heading">Trainings</h1>
+  <app-date-picker
+    class="trainig-page__date-picker"
+    (dateChange)="onDateChange($event)"
+  ></app-date-picker>
   <app-table></app-table>
-  <app-date-picker (rangeChange)="onRangeChange($event)"></app-date-picker>
 </div>

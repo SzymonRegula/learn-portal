@@ -5,7 +5,6 @@ import {
 } from '../../components/breadcrumbs/breadcrumbs.component';
 import { TableComponent } from '../../components/table/table.component';
 import { DatePickerComponent } from '../../components/date-picker/date-picker.component';
-import { DateRange } from '../../models/date-range.model';
 
 @Component({
   selector: 'app-training-page',
@@ -17,11 +16,10 @@ import { DateRange } from '../../models/date-range.model';
 export class TrainingPageComponent {
   breadcrumbs: Breadcrumb[] = [
     { text: 'My account', url: '/my-account' },
-    { text: 'Trainigs', url: '/my-account/trainig' },
-    { text: 'Add trainig', url: '/training' },
+    { text: 'Trainings', url: '/training' },
   ];
 
-  onRangeChange(range: DateRange) {
-    console.log(range);
+  onDateChange(date: Date) {
+    console.log(date);
   }
 }

@@ -1,40 +1,30 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+  MatDatepickerInputEvent,
+  MatDatepickerModule,
+} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { DateRange } from '../../models/date-range.model';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCalendar } from '@fortawesome/free-regular-svg-icons';
+
+type Size = 'medium' | 'large';
 
 @Component({
   selector: 'app-date-picker',
   standalone: true,
-  imports: [
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatFormFieldModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [MatDatepickerModule, MatNativeDateModule, FontAwesomeModule],
   templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.component.scss',
   providers: [],
 })
-export class DatePickerComponent implements OnInit {
-  @Output() rangeChange = new EventEmitter<DateRange>();
+export class DatePickerComponent {
+  @Output() dateChange = new EventEmitter<Date>();
+  @Input() size: Size = 'medium';
+  icon = faCalendar;
 
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
-
-  ngOnInit(): void {
-    this.range.valueChanges.subscribe((value) => {
-      this.rangeChange.emit(value as DateRange);
-    });
+  onDateChange(event: MatDatepickerInputEvent<Date>) {
+    if (event.value) {
+      this.dateChange.emit(event.value);
+    }
   }
 }
