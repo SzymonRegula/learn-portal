@@ -9,12 +9,16 @@ import { RegistrationVerificationPageComponent } from './pages/registration-veri
 import { TrainingPageComponent } from './pages/training-page/training-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { TrainingAddPageComponent } from './pages/training-add-page/training-add-page.component';
+import { authorizedGuard } from './auth/guards/authorized.guard';
+import { notAuthorizedGuard } from './auth/guards/not-authorized.guard';
+import { studentGuard } from './user/guards/student.guard';
 
 export const routes: Routes = [
   {
     path: 'change-password',
     title: 'Change password',
     component: ChangePasswordPageComponent,
+    canActivate: [authorizedGuard],
   },
   {
     path: 'home',
@@ -25,36 +29,43 @@ export const routes: Routes = [
     path: 'join-us',
     title: 'Join us',
     component: JoinUsPageComponent,
+    canActivate: [notAuthorizedGuard],
   },
   {
     path: 'login',
     title: 'Login',
     component: LoginPageComponent,
+    canActivate: [notAuthorizedGuard],
   },
   {
     path: 'my-account',
     title: 'My account',
     component: MyAccountPageComponent,
+    canActivate: [authorizedGuard],
   },
   {
     path: 'registration/:role',
     title: 'Registration',
     component: RegistrationPageComponent,
+    canActivate: [notAuthorizedGuard],
   },
   {
     path: 'registration-verification',
     title: 'Registration verification',
     component: RegistrationVerificationPageComponent,
+    canActivate: [notAuthorizedGuard],
   },
   {
     path: 'training',
     title: 'Training',
     component: TrainingPageComponent,
+    canActivate: [authorizedGuard],
   },
   {
     path: 'add-training',
     title: 'Add training',
     component: TrainingAddPageComponent,
+    canActivate: [authorizedGuard, studentGuard],
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {

@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { ButtonComponent } from '../button/button.component';
 import { RouterLink } from '@angular/router';
 import { LogoComponent } from '../logo/logo.component';
 import { MiniProfileComponent } from '../mini-profile/mini-profile.component';
 import { OutsideClickDirective } from '../../directives/outside-click.directive';
+import { AuthService } from '../../auth/services/auth.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -16,13 +18,15 @@ import { OutsideClickDirective } from '../../directives/outside-click.directive'
     LogoComponent,
     MiniProfileComponent,
     OutsideClickDirective,
+    AsyncPipe,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  // TODO: Add logic to check if user is logged in
-  logged = true;
+  private authService = inject(AuthService);
+  isAuthorized$ = this.authService.isAuthorized$;
+
   miniProfileOpen = false;
   user = {
     username: 'Jihn_12',

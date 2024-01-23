@@ -1,7 +1,7 @@
 <div class="header">
   <app-logo class="header__logo"> </app-logo>
   <app-navigation class="header__nav"></app-navigation>
-  @if (logged ) { @if (miniProfileOpen) {
+  @if (isAuthorized$ | async) { @if (miniProfileOpen) {
   <app-mini-profile
     class="header__mini-profile"
     (appOutsideClick)="toggleMiniProfile()"
@@ -19,7 +19,6 @@
       alt="user's avatar"
     />
   </button>
-
   } }@else {
   <div class="header__buttons">
     <app-button

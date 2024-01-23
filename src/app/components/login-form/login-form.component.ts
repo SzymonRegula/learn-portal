@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { faUser, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -9,6 +9,7 @@ import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { environment } from '../../../environments/environment';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -34,6 +35,8 @@ export class LoginFormComponent {
   siteKey = environment.recaptchaV2SiteKey;
   captchaResponse: string | null = null;
   private toastr = inject(ToastrService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   onSubmit(form: NgForm) {
     if (form.invalid) {
@@ -49,8 +52,12 @@ export class LoginFormComponent {
     setTimeout(() => {
       console.log(form.value);
       this.isLoading = false;
-
+      this.authService.login({
+        username: form.value.username,
+        password: form.value.password,
+      });
       this.toastr.success('Logged in successfully!');
+      this.router.navigate(['/']);
     }, 1000);
   }
 

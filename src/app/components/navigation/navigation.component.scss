@@ -70,12 +70,13 @@
 
   &__close-icon {
     align-self: flex-start;
+    margin-left: auto;
     color: $color-primary-500;
     cursor: pointer;
   }
 
   &__mobile-menu {
-    flex-grow: 1;
+    margin-bottom: auto;
   }
 
   &__mobile-menu-item {
@@ -118,6 +119,17 @@
     &:hover {
       color: $color-primary-500;
     }
+  }
+
+  &__login-buttons {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    gap: 8px;
+  }
+
+  &__login-btn {
+    height: 40px;
   }
 
   @media (max-width: $screen-sm) {
