@@ -68,7 +68,7 @@ $learn-portal-theme: mat.define-light-theme(
 // that you are using.
 @include mat.all-component-themes($learn-portal-theme);
 
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap");
 
 @import "ngx-toastr/toastr";
 
@@ -110,4 +110,29 @@ button {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+// Angular Material
+.mat-datepicker-content {
+  border-radius: $border-radius-xl !important;
+  box-shadow: $shadow-xs !important;
+}
+
+.mdc-button__label {
+  span {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: $font-family-secondary;
+  }
+}
+
+.mat-calendar-table-header {
+  span {
+    color: $color-primary-500;
+    font-weight: 600;
+  }
+}
+
+.mat-calendar-arrow {
+  display: none !important;
 }

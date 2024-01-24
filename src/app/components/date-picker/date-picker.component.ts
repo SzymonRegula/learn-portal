@@ -3,9 +3,14 @@ import {
   MatDatepickerInputEvent,
   MatDatepickerModule,
 } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MatNativeDateModule,
+} from '@angular/material/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
+import { CUSTOM_DATE_FORMATS, CustomDateAdapter } from './custom-date-adapter';
 
 type Size = 'medium' | 'large';
 
@@ -15,11 +20,15 @@ type Size = 'medium' | 'large';
   imports: [MatDatepickerModule, MatNativeDateModule, FontAwesomeModule],
   templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.component.scss',
-  providers: [],
+  providers: [
+    { provide: DateAdapter, useClass: CustomDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS },
+  ],
 })
 export class DatePickerComponent {
   @Output() dateChange = new EventEmitter<Date>();
   @Input() size: Size = 'medium';
+  @Input() date: Date | null = null;
   icon = faCalendar;
 
   onDateChange(event: MatDatepickerInputEvent<Date>) {
