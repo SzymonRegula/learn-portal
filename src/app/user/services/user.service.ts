@@ -51,4 +51,15 @@ export class UserService {
       catchError(this.errorService.handleError)
     );
   }
+
+  updateUser(data: unknown) {
+    return this.http.patch(`${environment.apiUrl}/users/me`, data).pipe(
+      tap((updatedData) => {
+        console.log(updatedData);
+        const updatedUser = { ...this.user$$.value, ...updatedData } as User;
+        return this.user$$.next(updatedUser);
+      }),
+      catchError(this.errorService.handleError)
+    );
+  }
 }

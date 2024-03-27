@@ -15,6 +15,11 @@
     margin-bottom: 26px;
   }
 
+  &__profile {
+    display: flex;
+    gap: 100px;
+  }
+
   &__form {
     width: 100%;
     padding: 32px;
@@ -29,8 +34,8 @@
   &__image {
     width: 160px;
     height: 160px;
+    object-fit: cover;
     flex-shrink: 0;
-    background: $color-primary-200;
     overflow: hidden;
     border-radius: $border-radius-l;
   }
@@ -157,8 +162,35 @@
     height: 44px;
   }
 
+  &__specialization {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__dropdown {
+    width: 192px;
+    height: 36px;
+    padding-left: 12px;
+    padding-right: 34px;
+    font-size: 14px;
+    line-height: 22px;
+    color: $color-neutral-900;
+    border: 1px solid $color-primary-500;
+    border-radius: $border-radius-m;
+    cursor: pointer;
+
+    &:focus-visible {
+      box-shadow: 0 0 0 1px $color-primary-500;
+    }
+  }
+
   @media (max-width: $screen-md) {
     width: 100%;
+
+    &__profile {
+      flex-direction: column;
+      gap: 32px;
+    }
 
     &__form {
       &--edit {

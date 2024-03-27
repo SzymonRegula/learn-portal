@@ -12,6 +12,7 @@ import { TrainingAddPageComponent } from './pages/training-add-page/training-add
 import { authorizedGuard } from './auth/guards/authorized.guard';
 import { notAuthorizedGuard } from './auth/guards/not-authorized.guard';
 import { studentGuard } from './user/guards/student.guard';
+import { userResolver } from './user/resolvers/user.resolver';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,7 @@ export const routes: Routes = [
     title: 'My account',
     component: MyAccountPageComponent,
     canActivate: [authorizedGuard],
+    resolve: { userResolver },
   },
   {
     path: 'registration/:role',

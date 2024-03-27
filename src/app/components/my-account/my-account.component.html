@@ -1,151 +1,184 @@
 <div class="my-account" [ngClass]="{ 'my-account--edit': editMode }">
-  <form
-    class="my-account__form"
-    [ngClass]="{ 'my-account__form--edit': editMode }"
-    [formGroup]="profileForm"
-    (ngSubmit)="onSaveChanges()"
-  >
-    <h2 class="my-account__heading">My profile</h2>
-    <div class="my-account__row my-account__row--status">
-      <img class="my-account__image" [src]="data.image" alt="user's avatar" />
-      @if (!editMode) {
-      <div class="my-account__group">
-        <label class="my-account__label">Status</label>
-        <div class="my-account__status-input-container">
-          <fa-icon
-            class="my-account__status-icon"
-            [ngClass]="{
-                'my-account__status-icon--active': data.status === 'active',
-                'my-account__status-icon--inactive': data.status === 'inactive',
+  <div [formGroup]="profileForm" class="my-account__profile">
+    <form
+      class="my-account__form"
+      [ngClass]="{ 'my-account__form--edit': editMode }"
+      (ngSubmit)="saveChangesHandler()"
+    >
+      <h2 class="my-account__heading">My profile</h2>
+      <div class="my-account__row my-account__row--status">
+        <img
+          class="my-account__image"
+          [src]="(user$ | async)?.photo || 'assets/avatar.png'"
+          alt="user's avatar"
+        />
+        @if (!editMode ) {
+        <div class="my-account__group">
+          <label class="my-account__label">Status</label>
+          <div class="my-account__status-input-container">
+            <fa-icon
+              class="my-account__status-icon"
+              [ngClass]="{
+                'my-account__status-icon--active': (user$ | async)?.isActive,
+                'my-account__status-icon--inactive': !(user$ | async)?.isActive
               }"
-            [icon]="data.status === 'active' ? activeIcon : inactiveIcon"
-            size="lg"
-          ></fa-icon>
+              [icon]="(user$ | async)?.isActive ? activeIcon : inactiveIcon"
+              size="lg"
+            ></fa-icon>
+            <input
+              class="my-account__control"
+              [ngClass]="{
+                  'my-account__control--status-active': (user$ | async)?.isActive,
+                  'my-account__control--status-inactive': !(user$ | async)?.isActive,
+                }"
+              type="text"
+              readonly
+              [value]="(user$ | async)?.isActive ? 'Active' : 'Inactive'"
+              tabindex="-1"
+            />
+          </div>
+        </div>
+        } @else {
+        <div class="my-account__upload-container">
+          <h3>Upload your photo</h3>
+          <p>Your photo should be in PNG or JPG format</p>
+          <div class="my-account__image-buttons">
+            <app-button
+              class="my-account__image-button"
+              type="button"
+              styleType="prime-border"
+              (click)="chooseImageHandler($event)"
+              >Choose image</app-button
+            >
+            <app-button
+              class="my-account__image-button"
+              type="button"
+              styleType="neutral-transparent"
+              (click)="removeImageHandler($event)"
+              >Remove</app-button
+            >
+          </div>
+        </div>
+        }
+      </div>
+
+      <div class="my-account__controls-group">
+        <div class="my-account__group">
+          <label class="my-account__label">First Name</label>
           <input
             class="my-account__control"
-            [ngClass]="{
-                'my-account__control--status-active': data.status === 'active',
-                'my-account__control--status-inactive': data.status === 'inactive',
-              }"
             type="text"
-            readonly
-            [value]="data.status | capitalizeFirst"
-            tabindex="-1"
+            [readonly]="!editMode"
+            [tabIndex]="editMode ? '' : -1"
+            formControlName="firstName"
           />
         </div>
-      </div>
-      } @else {
-      <div class="my-account__upload-container">
-        <h3>Upload your photo</h3>
-        <p>Your photo should be in PNG or JPG format</p>
-        <div class="my-account__image-buttons">
-          <app-button
-            class="my-account__image-button"
-            type="button"
-            styleType="prime-border"
-            (click)="chooseImageHandler($event)"
-            >Choose image</app-button
-          >
-          <app-button
-            class="my-account__image-button"
-            type="button"
-            styleType="neutral-transparent"
-            (click)="removeImageHandler($event)"
-            >Remove</app-button
-          >
+        <div class="my-account__group">
+          <label class="my-account__label">Last Name</label>
+          <input
+            class="my-account__control"
+            type="text"
+            [readonly]="!editMode"
+            [tabIndex]="editMode ? '' : -1"
+            formControlName="lastName"
+          />
         </div>
+        <div class="my-account__group">
+          <label class="my-account__label">Username</label>
+          <input
+            class="my-account__control"
+            type="text"
+            [readonly]="!editMode"
+            [tabIndex]="editMode ? '' : -1"
+            formControlName="username"
+          />
+        </div>
+        @if ((user$ | async)?.specialization !== undefined && !editMode) {
+        <div class="my-account__group">
+          <label class="my-account__label">Specialization</label>
+          <span class="my-account__control">{{
+            (user$ | async)?.specialization
+          }}</span>
+        </div>
+        } @if ((user$ | async)?.dateOfBirth !== undefined) {
+        <div class="my-account__group">
+          <label class="my-account__label">Date of birth</label>
+          <input
+            class="my-account__control"
+            type="text"
+            [readonly]="!editMode"
+            [tabIndex]="editMode ? '' : -1"
+            formControlName="dateOfBirth"
+          />
+        </div>
+        } @if ((user$ | async)?.address !== undefined) {
+        <div class="my-account__group">
+          <label class="my-account__label">Address</label>
+          <input
+            class="my-account__control"
+            type="text"
+            [readonly]="!editMode"
+            [tabIndex]="editMode ? '' : -1"
+            formControlName="address"
+          />
+        </div>
+        }
+        <div class="my-account__group">
+          <label class="my-account__label">Email</label>
+          <input
+            class="my-account__control"
+            type="text"
+            [readonly]="!editMode"
+            [tabIndex]="editMode ? '' : -1"
+            formControlName="email"
+          />
+        </div>
+        @if (editMode) {
+        <div class="my-account__group my-account__group--slider">
+          <label class="my-account__label">Active</label>
+          <mat-slide-toggle
+            hideIcon="true"
+            formControlName="isActive"
+          ></mat-slide-toggle>
+        </div>
+        }
+      </div>
+
+      @if (!editMode) {
+      <div class="my-account__buttons">
+        <app-button
+          class="my-account__button"
+          (click)="changeModeHandler()"
+          type="button"
+          >Edit profile</app-button
+        >
+        <app-button
+          class="my-account__button"
+          (click)="changePasswordHandler()"
+          type="button"
+          styleType="secondary"
+          routerLink="/change-password"
+          >Change password</app-button
+        >
       </div>
       }
-    </div>
+    </form>
 
-    <div class="my-account__controls-group">
-      <div class="my-account__group">
-        <label class="my-account__label">First Name</label>
-        <input
-          class="my-account__control"
-          type="text"
-          [readonly]="!editMode"
-          [tabIndex]="editMode ? '' : -1"
-          formControlName="firstName"
-        />
-      </div>
-      <div class="my-account__group">
-        <label class="my-account__label">Last Name</label>
-        <input
-          class="my-account__control"
-          type="text"
-          [readonly]="!editMode"
-          [tabIndex]="editMode ? '' : -1"
-          formControlName="lastName"
-        />
-      </div>
-      <div class="my-account__group">
-        <label class="my-account__label">User Name</label>
-        <input
-          class="my-account__control"
-          type="text"
-          [readonly]="!editMode"
-          [tabIndex]="editMode ? '' : -1"
-          formControlName="username"
-        />
-      </div>
-      <div class="my-account__group">
-        <label class="my-account__label">Date of birth</label>
-        <input
-          class="my-account__control"
-          type="text"
-          [readonly]="!editMode"
-          [tabIndex]="editMode ? '' : -1"
-          formControlName="dateOfBirth"
-        />
-      </div>
-      <div class="my-account__group">
-        <label class="my-account__label">Adress</label>
-        <input
-          class="my-account__control"
-          type="text"
-          [readonly]="!editMode"
-          [tabIndex]="editMode ? '' : -1"
-          formControlName="adress"
-        />
-      </div>
-      <div class="my-account__group">
-        <label class="my-account__label">Email</label>
-        <input
-          class="my-account__control"
-          type="text"
-          [readonly]="!editMode"
-          [tabIndex]="editMode ? '' : -1"
-          formControlName="email"
-        />
-      </div>
-      @if (editMode) {
-      <div class="my-account__group my-account__group--slider">
-        <label class="my-account__label">Active</label>
-        <mat-slide-toggle hideIcon="true"></mat-slide-toggle>
-      </div>
-      }
-    </div>
-
-    @if (!editMode) {
-    <div class="my-account__buttons">
-      <app-button
-        class="my-account__button"
-        (click)="changeModeHandler()"
-        type="button"
-        >Edit profile</app-button
-      >
-      <app-button
-        class="my-account__button"
-        (click)="changePasswordHandler()"
-        type="button"
-        styleType="secondary"
-        routerLink="/change-password"
-        >Change password</app-button
-      >
+    @if (editMode && ( user$|async)?.role === 'trainer' ) {
+    <div class="my-account__specialization">
+      <label class="my-account__label">Specialization</label>
+      <select class="my-account__dropdown" formControlName="specializationId">
+        <option value="fsafdsafas" default>
+          {{ (user$ | async)?.specialization }}
+        </option>
+        @for (spec of (specializations$ | async); track $index) {
+        <option [value]="spec.id">{{ spec.specialization }}</option>
+        }
+      </select>
     </div>
     }
-  </form>
+  </div>
+
   @if ( editMode ) {
   <div class="my-account__buttons my-account__buttons--edit">
     <app-button
@@ -157,7 +190,7 @@
     >
     <app-button
       class="my-account__button"
-      (click)="changeModeHandler()"
+      (click)="saveChangesHandler()"
       type="button"
       >Save changes</app-button
     >
