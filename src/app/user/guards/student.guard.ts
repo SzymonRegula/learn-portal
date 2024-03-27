@@ -7,7 +7,15 @@ export const studentGuard: CanActivateFn = (route, state) => {
   const userService = inject(UserService);
   const router = inject(Router);
 
-  return userService.userType$.pipe(
-    map((userType) => (userType === 'student' ? true : false))
+  return userService.tokenPayload$.pipe(
+    map((payload) => {
+      if (payload === null) {
+        return router.parseUrl('/login');
+      }
+      if (payload.role !== 'student') {
+        return router.parseUrl('/');
+      }
+      return true;
+    })
   );
 };

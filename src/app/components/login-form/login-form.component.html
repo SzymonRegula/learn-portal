@@ -65,11 +65,11 @@
       <p class="login-form__text login-form__text--bold">OR</p>
       <p>
         Don't have an account?
-        <a class="login-form__link" routerLink="/registration">Sign up</a>
+        <a class="login-form__link" routerLink="/join-us">Sign up</a>
       </p>
     </div>
 
-    <div class="login-form__recaptcha-box">
+    <!-- <div class="login-form__recaptcha-box">
       <re-captcha
         class="login-form__recaptcha"
         (resolved)="resolved($event)"
@@ -84,7 +84,7 @@
         >Confirmation is required.</span
       >
       }
-    </div>
+    </div> -->
   </form>
 
   @if (isLoading) {

@@ -6,27 +6,24 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { faMoon, faCircleUser } from '@fortawesome/free-regular-svg-icons';
 import { AuthService } from '../../auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../user/services/user.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-mini-profile',
   standalone: true,
-  imports: [FontAwesomeModule, RouterLink, MatSlideToggleModule],
+  imports: [FontAwesomeModule, RouterLink, MatSlideToggleModule, AsyncPipe],
   templateUrl: './mini-profile.component.html',
   styleUrl: './mini-profile.component.scss',
 })
 export class MiniProfileComponent {
   private authService = inject(AuthService);
   private toastr = inject(ToastrService);
+  tokenPayload$ = inject(UserService).tokenPayload$;
 
   logoutIcon = faArrowRightFromBracket;
   moonIcon = faMoon;
   accountIcon = faCircleUser;
-
-  user = {
-    imageSrc: 'assets/avatar-john.jpg',
-    username: 'Jihn_12',
-    email: 'john@gmail.com',
-  };
 
   onLogout() {
     this.authService.logout();

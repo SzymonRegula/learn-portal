@@ -65,7 +65,7 @@ export const routes: Routes = [
     path: 'add-training',
     title: 'Add training',
     component: TrainingAddPageComponent,
-    canActivate: [authorizedGuard, studentGuard],
+    canActivate: [studentGuard],
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {

@@ -4,13 +4,15 @@
     @if (isAuthorized$ | async) {
     <div class="navigation__user">
       <img
-        src="assets/avatar-john.jpg"
+        [src]="(tokenPayload$ | async)?.photo || 'assets/avatar.png'"
         alt="username profile picture"
         class="navigation__avatar"
       />
       <div>
-        <p class="navigation__username">{{ username }}</p>
-        <p class="navigation__email">{{ email }}</p>
+        <p class="navigation__username">
+          {{ (tokenPayload$ | async)?.username }}
+        </p>
+        <p class="navigation__email">{{ (tokenPayload$ | async)?.email }}</p>
       </div>
       <fa-icon
         class="navigation__close-icon"

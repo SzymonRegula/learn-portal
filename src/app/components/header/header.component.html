@@ -12,10 +12,12 @@
     class="header__user"
     (click)="toggleMiniProfile(); $event.stopPropagation()"
   >
-    <span class="header__username">{{ user.username }}</span>
+    <span class="header__username">{{
+      (tokenPayload$ | async)?.username
+    }}</span>
     <img
       class="header__user-avatar"
-      [src]="user.imageSrc"
+      [src]="(tokenPayload$ | async)?.photo || 'assets/avatar.png'"
       alt="user's avatar"
     />
   </button>
