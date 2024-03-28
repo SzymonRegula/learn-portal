@@ -68,4 +68,10 @@ export class UserService {
       catchError(this.errorService.handleError)
     );
   }
+
+  changePassword(data: { currentPassword: string; newPassword: string }) {
+    return this.http
+      .put(`${environment.apiUrl}/users/update-password`, data)
+      .pipe(catchError(this.errorService.handleError));
+  }
 }

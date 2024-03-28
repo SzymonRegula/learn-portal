@@ -10,7 +10,6 @@ import { environment } from '../../../environments/environment';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../auth/services/auth.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login-form',

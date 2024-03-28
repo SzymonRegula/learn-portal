@@ -154,7 +154,6 @@
         >
         <app-button
           class="my-account__button"
-          (click)="changePasswordHandler()"
           type="button"
           styleType="secondary"
           routerLink="/change-password"
@@ -168,9 +167,6 @@
     <div class="my-account__specialization">
       <label class="my-account__label">Specialization</label>
       <select class="my-account__dropdown" formControlName="specializationId">
-        <option value="fsafdsafas" default>
-          {{ (user$ | async)?.specialization }}
-        </option>
         @for (spec of (specializations$ | async); track $index) {
         <option [value]="spec.id">{{ spec.specialization }}</option>
         }

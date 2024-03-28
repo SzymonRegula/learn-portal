@@ -171,10 +171,6 @@ export class MyAccountComponent implements OnInit {
     this.setFormValues();
   }
 
-  changePasswordHandler() {
-    console.log('changePasswordHandler');
-  }
-
   chooseImageHandler(event: Event) {
     this.modal.open(ModalBoxComponent, {
       data: { title: 'Upload files' },

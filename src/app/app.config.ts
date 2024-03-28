@@ -16,6 +16,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
     provideAnimations(),
-    provideToastr(),
+    provideToastr({ positionClass: 'toast-top-center' }),
   ],
 };
