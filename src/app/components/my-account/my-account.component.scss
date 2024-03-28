@@ -209,5 +209,9 @@
     &__button {
       width: fit-content;
     }
+
+    &__row {
+      flex-direction: column;
+    }
   }
 }

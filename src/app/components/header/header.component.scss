@@ -16,6 +16,7 @@
   }
 
   &__nav {
+    overflow-x: auto;
     margin-left: 66px;
     width: 100%;
   }
@@ -69,6 +70,10 @@
     &__buttons {
       margin-right: 15px;
       gap: 5px;
+    }
+
+    &__username {
+      display: none;
     }
   }
 
