@@ -31,7 +31,7 @@ import { UserService } from '../../user/services/user.service';
 export class NavigationComponent {
   private authService = inject(AuthService);
   private toastr = inject(ToastrService);
-  tokenPayload$ = inject(UserService).tokenPayload$;
+  user$ = inject(UserService).user$;
   isAuthorized$ = this.authService.isAuthorized$;
   burgerMenuIcon = faEllipsis;
   closeMenuIcon = faXmark;

@@ -19,7 +19,7 @@ import { AsyncPipe } from '@angular/common';
 export class MiniProfileComponent {
   private authService = inject(AuthService);
   private toastr = inject(ToastrService);
-  tokenPayload$ = inject(UserService).tokenPayload$;
+  user$ = inject(UserService).user$;
 
   logoutIcon = faArrowRightFromBracket;
   moonIcon = faMoon;

@@ -16,7 +16,7 @@ import { ModalBoxComponent } from '../modal-box/modal-box.component';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../user/services/user.service';
 import { ToastrService } from 'ngx-toastr';
-import { take } from 'rxjs';
+import { filter, first } from 'rxjs';
 import { SpecializationsService } from '../../services/specializations.service';
 
 type UpdateData = {
@@ -84,34 +84,40 @@ export class MyAccountComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.setFormValues();
     this.specializationsService.getSpecializations().subscribe();
+    this.setFormValues();
   }
 
   private setFormValues(): void {
-    this.user$.pipe(take(1)).subscribe((user) => {
-      if (!user) {
-        return;
-      }
+    this.user$
+      .pipe(
+        filter((user) => !!user),
+        first()
+      )
+      .subscribe((user) => {
+        console.log('setFormValues -> user', user);
+        if (!user) {
+          return;
+        }
 
-      let customDate: string = '';
-      if (user.dateOfBirth) {
-        const date = new Date(user.dateOfBirth);
-        customDate = this.customDateService.ddmmyyyy(date);
-      }
+        let customDate: string = '';
+        if (user.dateOfBirth) {
+          const date = new Date(user.dateOfBirth);
+          customDate = this.customDateService.ddmmyyyy(date);
+        }
 
-      this.profileForm.patchValue({
-        photo: user.photo,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        username: user.username,
-        email: user.email,
-        isActive: user.isActive,
-        dateOfBirth: customDate,
-        address: user.address,
-        specializationId: user.specializationId,
+        this.profileForm.patchValue({
+          photo: user.photo,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          username: user.username,
+          email: user.email,
+          isActive: user.isActive,
+          dateOfBirth: customDate,
+          address: user.address,
+          specializationId: user.specializationId,
+        });
       });
-    });
   }
 
   private getDirtyValues(): UpdateData {
@@ -171,13 +177,19 @@ export class MyAccountComponent implements OnInit {
     this.setFormValues();
   }
 
-  chooseImageHandler(event: Event) {
+  openConfirmationModal() {}
+
+  chooseImageHandler() {
     this.modal.open(ModalBoxComponent, {
       data: { title: 'Upload files' },
     });
   }
 
-  removeImageHandler(event: Event) {
+  removeImageHandler() {
     console.log('removeImageHandler');
+  }
+
+  get isActive() {
+    return this.profileForm.get('isActive')?.value;
   }
 }

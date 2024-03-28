@@ -2,14 +2,14 @@
   <div class="mini-profile__user">
     <img
       class="mini-profile__avatar"
-      [src]="(tokenPayload$ | async)?.photo || 'assets/avatar.png'"
+      [src]="(user$ | async)?.photo || 'assets/avatar.png'"
       alt="user's avatar"
     />
     <div class="mini-profile__data">
       <p class="mini-profile__username">
-        {{ (tokenPayload$ | async)?.username }}
+        {{ (user$ | async)?.username }}
       </p>
-      <p class="mini-profile__email">{{ (tokenPayload$ | async)?.email }}</p>
+      <p class="mini-profile__email">{{ (user$ | async)?.email }}</p>
     </div>
   </div>
 

@@ -15,28 +15,30 @@
         @if (!editMode ) {
         <div class="my-account__group">
           <label class="my-account__label">Status</label>
+          @if ((user$|async)!== null) {
           <div class="my-account__status-input-container">
             <fa-icon
               class="my-account__status-icon"
               [ngClass]="{
-                'my-account__status-icon--active': (user$ | async)?.isActive,
-                'my-account__status-icon--inactive': !(user$ | async)?.isActive
+                'my-account__status-icon--active': isActive,
+                'my-account__status-icon--inactive': !isActive
               }"
-              [icon]="(user$ | async)?.isActive ? activeIcon : inactiveIcon"
+              [icon]="isActive ? activeIcon : inactiveIcon"
               size="lg"
             ></fa-icon>
             <input
               class="my-account__control"
               [ngClass]="{
-                  'my-account__control--status-active': (user$ | async)?.isActive,
-                  'my-account__control--status-inactive': !(user$ | async)?.isActive,
-                }"
+                    'my-account__control--status-active': isActive,
+                    'my-account__control--status-inactive': !isActive,
+                  }"
               type="text"
               readonly
-              [value]="(user$ | async)?.isActive ? 'Active' : 'Inactive'"
+              [value]="isActive ? 'Active' : 'Inactive'"
               tabindex="-1"
             />
           </div>
+          }
         </div>
         } @else {
         <div class="my-account__upload-container">
@@ -47,14 +49,14 @@
               class="my-account__image-button"
               type="button"
               styleType="prime-border"
-              (click)="chooseImageHandler($event)"
+              (click)="chooseImageHandler()"
               >Choose image</app-button
             >
             <app-button
               class="my-account__image-button"
               type="button"
               styleType="neutral-transparent"
-              (click)="removeImageHandler($event)"
+              (click)="removeImageHandler()"
               >Remove</app-button
             >
           </div>
@@ -158,6 +160,13 @@
           styleType="secondary"
           routerLink="/change-password"
           >Change password</app-button
+        >
+        <app-button
+          class="my-account__button"
+          type="button"
+          styleType="important"
+          (click)="openConfirmationModal()"
+          >Delete profile</app-button
         >
       </div>
       }

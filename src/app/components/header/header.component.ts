@@ -26,7 +26,7 @@ import { UserService } from '../../user/services/user.service';
 })
 export class HeaderComponent {
   isAuthorized$ = inject(AuthService).isAuthorized$;
-  tokenPayload$ = inject(UserService).tokenPayload$;
+  user$ = inject(UserService).user$;
 
   miniProfileOpen = false;
 

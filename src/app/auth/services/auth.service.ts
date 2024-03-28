@@ -1,35 +1,16 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, tap } from 'rxjs';
+import { BehaviorSubject, catchError, switchMap, tap } from 'rxjs';
 import { UserService } from '../../user/services/user.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { SessionStorageService } from './session-storage.service';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
-import { Role } from '../../models/role.model';
 import { ErrorHandlingService } from '../../services/error-handling.service';
-
-export type TokenPayload = {
-  userId: string;
-  username: string;
-  role: Role;
-  photo: string;
-  email: string;
-};
 
 type LoginData = {
   username: string;
   password: string;
-};
-
-const getPayload = (decodedJwt: JwtPayload & TokenPayload): TokenPayload => {
-  return {
-    userId: decodedJwt.userId,
-    username: decodedJwt.username,
-    role: decodedJwt.role,
-    photo: decodedJwt.photo,
-    email: decodedJwt.email,
-  };
 };
 
 @Injectable({
@@ -48,7 +29,7 @@ export class AuthService {
   ) {
     const token = this.sessionStorageService.getToken();
     if (token) {
-      const decodedJwt = jwtDecode<JwtPayload & TokenPayload>(token);
+      const decodedJwt = jwtDecode<JwtPayload>(token);
 
       if (decodedJwt.exp! * 1000 < Date.now()) {
         this.sessionStorageService.removeToken();
@@ -56,9 +37,11 @@ export class AuthService {
         return;
       }
 
-      userService.saveTokenPayload(getPayload(decodedJwt));
-
       this.isAuthorized$$.next(true);
+
+      if (this.isAuthorized$$.value) {
+        this.userService.getUser().subscribe();
+      }
     }
   }
 
@@ -68,12 +51,9 @@ export class AuthService {
       .pipe(
         tap((token) => {
           this.sessionStorageService.saveToken(token);
-
-          const decodedJwt = jwtDecode<JwtPayload & TokenPayload>(token);
-          this.userService.saveTokenPayload(getPayload(decodedJwt));
-
           this.isAuthorized$$.next(true);
         }),
+        switchMap(() => this.userService.getUser()),
         catchError(this.errorService.handleError)
       );
   }
