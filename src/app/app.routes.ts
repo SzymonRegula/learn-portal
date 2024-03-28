@@ -55,7 +55,6 @@ export const routes: Routes = [
     path: 'registration-verification',
     title: 'Registration verification',
     component: RegistrationVerificationPageComponent,
-    canActivate: [notAuthorizedGuard],
   },
   {
     path: 'training',

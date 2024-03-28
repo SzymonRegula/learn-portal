@@ -52,6 +52,12 @@ export class UserService {
     );
   }
 
+  registerUser(data: unknown) {
+    return this.http
+      .post(`${environment.apiUrl}/auth/register`, data)
+      .pipe(catchError(this.errorService.handleError));
+  }
+
   updateUser(data: unknown) {
     return this.http.patch(`${environment.apiUrl}/users/me`, data).pipe(
       tap((updatedData) => {
