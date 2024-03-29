@@ -1,4 +1,11 @@
 <div class="my-account-page">
   <h1 class="my-account-page__heading">My Account</h1>
-  <app-my-account></app-my-account>
+  <section class="my-account-page__container">
+    <app-my-account></app-my-account>
+    @if ((user$|async)?.role === "student") {
+    <app-my-trainers [addTrainer]="true"></app-my-trainers>
+    } @if ((user$|async)?.role === "trainer") {
+    <app-my-students></app-my-students>
+    }
+  </section>
 </div>

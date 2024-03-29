@@ -39,9 +39,7 @@ export class AuthService {
 
       this.isAuthorized$$.next(true);
 
-      if (this.isAuthorized$$.value) {
-        this.userService.getUser().subscribe();
-      }
+      this.userService.getUser().subscribe();
     }
   }
 
@@ -61,6 +59,6 @@ export class AuthService {
   logout() {
     this.sessionStorageService.removeToken();
     this.isAuthorized$$.next(false);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 }

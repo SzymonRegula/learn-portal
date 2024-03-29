@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { ErrorHandlingService } from './error-handling.service';
 
 type Specialization = {
   id: string;
@@ -17,6 +18,7 @@ export class SpecializationsService {
   specializations$ = this.specializations$$.asObservable();
 
   private http = inject(HttpClient);
+  private errorService = inject(ErrorHandlingService);
 
   getSpecializations() {
     return this.http
@@ -24,7 +26,8 @@ export class SpecializationsService {
         `${environment.apiUrl}/users/trainers/specializations`
       )
       .pipe(
-        tap((specializations) => this.specializations$$.next(specializations))
+        tap((specializations) => this.specializations$$.next(specializations)),
+        catchError(this.errorService.handleError)
       );
   }
 }

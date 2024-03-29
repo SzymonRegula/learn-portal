@@ -14,4 +14,25 @@
     color: $color-neutral-900;
     text-align: center;
   }
+
+  &__container {
+    display: flex;
+    gap: 32px;
+
+    app-my-account {
+      width: 100%;
+    }
+
+    app-my-trainers {
+      padding: 32px;
+      min-width: 428px;
+    }
+  }
+
+  @media (max-width: $screen-md) {
+    &__container {
+      flex-direction: column;
+      gap: 24px;
+    }
+  }
 }

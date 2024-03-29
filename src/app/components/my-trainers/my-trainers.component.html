@@ -1,0 +1,24 @@
+<header class="my-trainers__header">
+  <h2 class="my-trainers__heading">My Trainers</h2>
+  @if (addTrainer) {
+  <app-button class="my-trainers__button" routerLink="/add-training"
+    >Add trainer</app-button
+  >
+  }
+</header>
+<table class="my-trainers__table">
+  <thead>
+    <tr>
+      <th>NAME</th>
+      <th>SPECIALIZATION</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (trainer of myTrainers$ | async; track $index) {
+    <tr>
+      <td>{{ trainer.firstName }} {{ trainer.lastName }}</td>
+      <td>{{ trainer.specialization }}</td>
+    </tr>
+    }
+  </tbody>
+</table>

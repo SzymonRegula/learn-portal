@@ -4,7 +4,6 @@ import { BehaviorSubject, catchError, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Role } from '../../models/role.model';
 import { ErrorHandlingService } from '../../services/error-handling.service';
-import { AuthService } from '../../auth/services/auth.service';
 
 type User = {
   id: string;

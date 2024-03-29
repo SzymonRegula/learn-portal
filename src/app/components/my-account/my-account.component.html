@@ -5,7 +5,12 @@
       [ngClass]="{ 'my-account__form--edit': editMode }"
       (ngSubmit)="saveChangesHandler()"
     >
-      <h2 class="my-account__heading">My profile</h2>
+      <h2 class="my-account__heading">
+        {{ editMode ? "Edit profile" : "My profile" }}
+      </h2>
+      <label *ngIf="editMode" class="my-account__label my-account__photo-label"
+        >Profile photo</label
+      >
       <div class="my-account__row my-account__row--status">
         <img
           class="my-account__image"

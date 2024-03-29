@@ -98,7 +98,6 @@ export class MyAccountComponent implements OnInit {
         first()
       )
       .subscribe((user) => {
-        console.log('setFormValues -> user', user);
         if (!user) {
           return;
         }
