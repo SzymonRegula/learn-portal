@@ -1,9 +1,7 @@
 <div class="modal-box">
   <div class="modal-box__header">
-    <h1 class="modal-box__heading" mat-dialog-title>
-      Profile Deletion Confirmation
-    </h1>
-    <button mat-dialog-close mat-dialog-title type="button">
+    <h1 class="modal-box__heading">Profile Deletion Confirmation</h1>
+    <button mat-dialog-close class="modal-box__close-button" type="button">
       <fa-icon
         class="modal-box__close-icon"
         [icon]="closeIcon"
@@ -11,7 +9,7 @@
       ></fa-icon>
     </button>
   </div>
-  <div class="modal-box__content" mat-dialog-content>
+  <div class="modal-box__content">
     <p>
       We're truly sorry to see you go. Before you proceed with deleting your
       profile, we want you to know that this action is permanent and
@@ -28,7 +26,7 @@
       the'Confirm'button below.
     </p>
   </div>
-  <div class="modal-box__actions" mat-dialog-actions>
+  <div class="modal-box__actions">
     <app-button
       class="modal-box__action"
       mat-button
@@ -36,7 +34,12 @@
       styleType="neutral-transparent"
       >Cancel</app-button
     >
-    <app-button class="modal-box__action" styleType="important" mat-button
+    <app-button
+      class="modal-box__action"
+      styleType="important"
+      mat-button
+      [mat-dialog-close]="true"
+      cdkFocusInitial
       >Confirm</app-button
     >
   </div>

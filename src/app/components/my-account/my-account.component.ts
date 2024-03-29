@@ -18,6 +18,7 @@ import { UserService } from '../../user/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { filter, first } from 'rxjs';
 import { SpecializationsService } from '../../services/specializations.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 type UpdateData = {
   [key: string]: unknown;
@@ -55,6 +56,8 @@ export class MyAccountComponent implements OnInit {
   private userService = inject(UserService);
   private specializationsService = inject(SpecializationsService);
   private toastr = inject(ToastrService);
+  private authService = inject(AuthService);
+
   user$ = this.userService.user$;
   specializations$ = this.specializationsService.specializations$;
   editMode = false;
@@ -177,12 +180,28 @@ export class MyAccountComponent implements OnInit {
     this.setFormValues();
   }
 
-  openConfirmationModal() {}
+  deleteProfileHandler() {
+    this.modal
+      .open(ModalBoxComponent)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.userService.deleteUser().subscribe({
+            next: () => {
+              this.toastr.success('Profile deleted successfully!');
+              this.authService.logout();
+            },
+            error: (error) => {
+              this.toastr.error('Failed to delete profile!');
+              console.error(error);
+            },
+          });
+        }
+      });
+  }
 
   chooseImageHandler() {
-    this.modal.open(ModalBoxComponent, {
-      data: { title: 'Upload files' },
-    });
+    console.log('chooseImageHandler');
   }
 
   removeImageHandler() {

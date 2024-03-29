@@ -4,6 +4,7 @@ import { BehaviorSubject, catchError, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Role } from '../../models/role.model';
 import { ErrorHandlingService } from '../../services/error-handling.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 type User = {
   id: string;
@@ -48,6 +49,15 @@ export class UserService {
     return this.http
       .post(`${environment.apiUrl}/auth/register`, data)
       .pipe(catchError(this.errorService.handleError));
+  }
+
+  deleteUser() {
+    return this.http.delete(`${environment.apiUrl}/users/me`).pipe(
+      tap(() => {
+        this.user$$.next(null);
+      }),
+      catchError(this.errorService.handleError)
+    );
   }
 
   updateUser(data: unknown) {
