@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { SessionStorageService } from './session-storage.service';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { ErrorHandlingService } from '../../services/error-handling.service';
+import { Role } from '../../models/role.model';
 
 type LoginData = {
   username: string;
@@ -19,6 +20,8 @@ type LoginData = {
 export class AuthService {
   private isAuthorized$$ = new BehaviorSubject<boolean>(false);
   isAuthorized$ = this.isAuthorized$$.asObservable();
+  private role$$ = new BehaviorSubject<Role | null>(null);
+  role$ = this.role$$.asObservable();
 
   constructor(
     private userService: UserService,
@@ -29,15 +32,14 @@ export class AuthService {
   ) {
     const token = this.sessionStorageService.getToken();
     if (token) {
-      const decodedJwt = jwtDecode<JwtPayload>(token);
+      const decodedJwt = jwtDecode<JwtPayload & { role: Role }>(token);
 
       if (decodedJwt.exp! * 1000 < Date.now()) {
         this.sessionStorageService.removeToken();
-        this.isAuthorized$$.next(false);
         return;
       }
 
-      this.isAuthorized$$.next(true);
+      this.setState(decodedJwt.role);
 
       this.userService.getUser().subscribe();
     }
@@ -49,7 +51,8 @@ export class AuthService {
       .pipe(
         tap((token) => {
           this.sessionStorageService.saveToken(token);
-          this.isAuthorized$$.next(true);
+          const decodedJwt = jwtDecode<JwtPayload & { role: Role }>(token);
+          this.setState(decodedJwt.role);
         }),
         switchMap(() => this.userService.getUser()),
         catchError(this.errorService.handleError)
@@ -58,7 +61,12 @@ export class AuthService {
 
   logout() {
     this.sessionStorageService.removeToken();
-    this.isAuthorized$$.next(false);
+    this.setState(null);
     this.router.navigate(['/']);
+  }
+
+  private setState(role: Role | null) {
+    this.role$$.next(role);
+    role ? this.isAuthorized$$.next(true) : this.isAuthorized$$.next(false);
   }
 }

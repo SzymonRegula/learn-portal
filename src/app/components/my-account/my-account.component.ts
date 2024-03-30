@@ -16,7 +16,7 @@ import { ModalBoxComponent } from '../modal-box/modal-box.component';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../user/services/user.service';
 import { ToastrService } from 'ngx-toastr';
-import { filter, first } from 'rxjs';
+import { EMPTY, filter, first, switchMap } from 'rxjs';
 import { SpecializationsService } from '../../services/specializations.service';
 import { AuthService } from '../../auth/services/auth.service';
 
@@ -87,7 +87,16 @@ export class MyAccountComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.specializationsService.getSpecializations().subscribe();
+    this.authService.role$
+      .pipe(
+        first(),
+        switchMap((role) =>
+          role === 'trainer'
+            ? this.specializationsService.getSpecializations()
+            : EMPTY
+        )
+      )
+      .subscribe();
     this.setFormValues();
   }
 
