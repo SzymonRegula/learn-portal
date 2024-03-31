@@ -12,6 +12,7 @@ import { TrainingAddPageComponent } from './pages/training-add-page/training-add
 import { authorizedGuard } from './auth/guards/authorized.guard';
 import { notAuthorizedGuard } from './auth/guards/not-authorized.guard';
 import { studentGuard } from './user/guards/student.guard';
+import { TrainerAddPageComponent } from './pages/trainer-add-page/trainer-add-page.component';
 
 export const routes: Routes = [
   {
@@ -64,6 +65,12 @@ export const routes: Routes = [
     path: 'add-training',
     title: 'Add training',
     component: TrainingAddPageComponent,
+    canActivate: [authorizedGuard, studentGuard],
+  },
+  {
+    path: 'add-trainer',
+    title: 'Add trainer',
+    component: TrainerAddPageComponent,
     canActivate: [authorizedGuard, studentGuard],
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },

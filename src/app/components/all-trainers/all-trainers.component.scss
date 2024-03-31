@@ -1,6 +1,6 @@
 @import "variables";
 
-.my-trainers {
+.all-trainers {
   &__header {
     display: flex;
     align-items: center;
@@ -18,7 +18,9 @@
   }
 
   &__button {
+    display: inline-block;
     height: 44px;
+    width: 88px;
   }
 
   &__table {
@@ -27,6 +29,7 @@
     border-spacing: 0;
     border: 1px solid $color-neutral-250;
     border-radius: $border-radius-m;
+    margin-bottom: 26px;
 
     thead {
       background: $color-neutral-100;
@@ -38,18 +41,27 @@
       padding: 16px 12px;
       font-size: 14px;
       line-height: 22px;
-    }
-
-    th {
       width: 50%;
+
+      &:first-child {
+        box-sizing: content-box;
+        width: 40px;
+      }
     }
 
     td {
       border-top: 1px solid $color-neutral-250;
 
-      &:first-child {
+      &:nth-child(2) {
         font-weight: 700;
       }
     }
+  }
+
+  &__checkbox {
+    width: 16px;
+    height: 16px;
+
+    color: $color-primary-500;
   }
 }

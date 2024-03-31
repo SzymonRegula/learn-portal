@@ -75,4 +75,10 @@ export class UserService {
       .put(`${environment.apiUrl}/users/update-password`, data)
       .pipe(catchError(this.errorService.handleError));
   }
+
+  addTrainer(trainerId: string) {
+    return this.http
+      .post(`${environment.apiUrl}/users/trainers`, { trainerId })
+      .pipe(catchError(this.errorService.handleError));
+  }
 }

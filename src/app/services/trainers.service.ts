@@ -36,13 +36,25 @@ export class TrainersService {
     this.userService.user$,
     this.activeTrainers$,
   ]).pipe(
-    map(([user, activeTrainers]) => {
-      if (user?.role === 'student') {
-        return activeTrainers.filter((trainer) =>
-          user.trainerIds?.includes(trainer.id)
-        );
-      }
-      return [];
-    })
+    map(([user, activeTrainers]) =>
+      user?.role === 'student'
+        ? activeTrainers.filter((trainer) =>
+            user.trainerIds?.includes(trainer.id)
+          )
+        : []
+    )
+  );
+
+  notMyTrainers$ = combineLatest([
+    this.userService.user$,
+    this.activeTrainers$,
+  ]).pipe(
+    map(([user, activeTrainers]) =>
+      user?.role === 'student'
+        ? activeTrainers.filter(
+            (trainer) => !user.trainerIds?.includes(trainer.id)
+          )
+        : activeTrainers
+    )
   );
 }

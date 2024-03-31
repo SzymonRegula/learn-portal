@@ -1,0 +1,38 @@
+@import "variables";
+
+.trainer-add-page {
+  margin: 48px auto 132px auto;
+  width: 90%;
+  max-width: $screen-lg;
+
+  &__heading {
+    text-align: center;
+    font-family: $font-family-secondary;
+    font-size: 56px;
+    line-height: 78px;
+    font-weight: 700;
+    color: $color-neutral-900;
+    margin-bottom: 26px;
+  }
+
+  &__text {
+    font-size: 16px;
+    line-height: 26px;
+    color: $color-neutral-900;
+    margin-bottom: 72px;
+  }
+
+  &__tables {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    gap: 162px;
+
+    app-my-trainers {
+      width: 428px;
+    }
+
+    app-all-trainers {
+      width: 478px;
+    }
+  }
+}
