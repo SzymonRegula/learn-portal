@@ -25,7 +25,8 @@
 
     app-my-trainers {
       padding: 32px;
-      min-width: 428px;
+      max-width: 428px;
+      flex-shrink: 0;
     }
   }
 
