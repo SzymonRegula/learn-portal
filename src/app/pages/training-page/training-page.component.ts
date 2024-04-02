@@ -5,6 +5,7 @@ import {
 } from '../../components/breadcrumbs/breadcrumbs.component';
 import { TableComponent } from '../../components/table/table.component';
 import { DatePickerComponent } from '../../components/date-picker/date-picker.component';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-training-page',
@@ -15,8 +16,8 @@ import { DatePickerComponent } from '../../components/date-picker/date-picker.co
 })
 export class TrainingPageComponent {
   breadcrumbs: Breadcrumb[] = [
-    { text: 'My account', url: '/my-account' },
-    { text: 'Trainings', url: '/training' },
+    { text: 'My account', url: '/' + PATHS.myAccount },
+    { text: 'Trainings', url: '/' + PATHS.trainings },
   ];
 
   onDateChange(date: Date) {

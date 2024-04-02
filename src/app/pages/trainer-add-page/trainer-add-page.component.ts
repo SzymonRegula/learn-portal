@@ -3,6 +3,7 @@ import { BreadcrumbsComponent } from '../../components/breadcrumbs/breadcrumbs.c
 import { MyTrainersComponent } from '../../components/my-trainers/my-trainers.component';
 import { AllTrainersComponent } from '../../components/all-trainers/all-trainers.component';
 import { TrainersService } from '../../services/trainers.service';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-trainer-add-page',
@@ -13,8 +14,8 @@ import { TrainersService } from '../../services/trainers.service';
 })
 export class TrainerAddPageComponent implements OnInit {
   breadcrumbs = [
-    { text: 'My account', url: '/my-account' },
-    { text: 'Add trainer', url: '/add-trainer' },
+    { text: 'My account', url: '/' + PATHS.myAccount },
+    { text: 'Add trainer', url: '/' + PATHS.addTrainer },
   ];
 
   private trainersService = inject(TrainersService);

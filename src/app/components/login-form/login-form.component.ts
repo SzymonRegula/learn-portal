@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../auth/services/auth.service';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-login-form',
@@ -27,6 +28,7 @@ import { AuthService } from '../../auth/services/auth.service';
   styleUrl: './login-form.component.scss',
 })
 export class LoginFormComponent {
+  joinUsPath = '/' + PATHS.joinUs;
   userIcon = faUser;
   lockIcon = faLock;
   eyeIcon = faEyeSlash;

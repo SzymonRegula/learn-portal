@@ -3,6 +3,7 @@ import {
   Breadcrumb,
   BreadcrumbsComponent,
 } from '../../components/breadcrumbs/breadcrumbs.component';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-training-add-page',
@@ -13,8 +14,8 @@ import {
 })
 export class TrainingAddPageComponent {
   breadcrumbs: Breadcrumb[] = [
-    { text: 'My account', url: '/my-account' },
-    { text: 'Trainings', url: '/training' },
-    { text: 'Add trainings', url: '/add-training' },
+    { text: 'My account', url: '/' + PATHS.myAccount },
+    { text: 'Trainings', url: '/' + PATHS.trainings },
+    { text: 'Add trainings', url: '/' + PATHS.addTraining },
   ];
 }

@@ -8,6 +8,7 @@ import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.comp
 import { UserService } from '../../user/services/user.service';
 import { AuthService } from '../../auth/services/auth.service';
 import { RouterLink } from '@angular/router';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-change-password-form',
@@ -23,6 +24,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './change-password-form.component.scss',
 })
 export class ChangePasswordFormComponent {
+  myAccountPath = '/' + PATHS.myAccount;
   eyeIcon = faEyeSlash;
   hidePassword = { current: true, new: true, confirm: true };
   isLoading = false;

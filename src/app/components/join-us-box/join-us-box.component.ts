@@ -3,6 +3,7 @@ import { ButtonComponent } from '../button/button.component';
 import { RouterLink } from '@angular/router';
 import { CapitalizeFirstPipe } from '../../pipes/capitalize-first.pipe';
 import { Role } from '../../models/role.model';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-join-us-box',
@@ -12,6 +13,7 @@ import { Role } from '../../models/role.model';
   styleUrl: './join-us-box.component.scss',
 })
 export class JoinUsBoxComponent implements OnInit {
+  registrationPath = '/' + PATHS.registration;
   @Input() role: Role = 'student';
   @Input() description: string = '';
   imageSrc = 'assets/join-us-student.jpeg';

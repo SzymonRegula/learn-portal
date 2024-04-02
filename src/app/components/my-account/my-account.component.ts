@@ -19,6 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 import { filter, first } from 'rxjs';
 import { SpecializationsService } from '../../services/specializations.service';
 import { AuthService } from '../../auth/services/auth.service';
+import { PATHS } from '../../paths';
 
 type UpdateData = {
   [key: string]: unknown;
@@ -50,6 +51,8 @@ type UpdateData = {
   styleUrl: './my-account.component.scss',
 })
 export class MyAccountComponent implements OnInit {
+  changePasswordPath = '/' + PATHS.changePassword;
+
   private fb = inject(FormBuilder);
   private customDateService = inject(CustomDateService);
   private modal = inject(MatDialog);

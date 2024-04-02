@@ -5,10 +5,10 @@
       <h3 class="footer__heading">Product</h3>
       <ul>
         <li class="footer__nav-item">
-          <a routerLink="/features">Features</a>
+          <a [routerLink]="['/', PATHS.features]">Features</a>
         </li>
         <li class="footer__nav-item">
-          <a routerLink="/pricing">Pricing</a>
+          <a [routerLink]="['/', PATHS.pricing]">Pricing</a>
         </li>
       </ul>
     </nav>
@@ -16,13 +16,13 @@
       <h3 class="footer__heading">Resources</h3>
       <ul>
         <li class="footer__nav-item">
-          <a routerLink="/blog">Blog</a>
+          <a [routerLink]="['/', PATHS.blog]">Blog</a>
         </li>
         <li class="footer__nav-item">
-          <a routerLink="/user-guides">User guides</a>
+          <a [routerLink]="['/', PATHS.userGuides]">User guides</a>
         </li>
         <li class="footer__nav-item">
-          <a routerLink="/webinars">Webinars</a>
+          <a [routerLink]="['/', PATHS.webinars]">Webinars</a>
         </li>
       </ul>
     </nav>
@@ -30,10 +30,10 @@
       <h3 class="footer__heading">Company</h3>
       <ul>
         <li class="footer__nav-item">
-          <a routerLink="/about-us">About us</a>
+          <a [routerLink]="['/', PATHS.aboutUs]">About us</a>
         </li>
         <li class="footer__nav-item">
-          <a routerLink="/contact">Contact us</a>
+          <a [routerLink]="['/', PATHS.contact]">Contact us</a>
         </li>
       </ul>
     </nav>
@@ -76,9 +76,9 @@
     <div class="footer__text">
       <span>© 2024 Learn, Inc. </span>
       <span> · </span>
-      <a routerLink="/privacy">Privacy </a>
+      <a [routerLink]="['/', PATHS.privacy]">Privacy </a>
       <span> · </span>
-      <a routerLink="/terms">Terms</a>
+      <a [routerLink]="['/', PATHS.terms]">Terms</a>
     </div>
     <div class="footer__social-media">
       <a href="https://twitter.com" target="_blank">

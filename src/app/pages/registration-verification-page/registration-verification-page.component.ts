@@ -5,6 +5,7 @@ import { ButtonComponent } from '../../components/button/button.component';
 import { RouterLink } from '@angular/router';
 import { CredentialsService } from '../../services/credentials.service';
 import { AsyncPipe } from '@angular/common';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-registration-verification-page',
@@ -14,6 +15,7 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './registration-verification-page.component.scss',
 })
 export class RegistrationVerificationPageComponent implements OnDestroy {
+  myAccountPath = '/' + PATHS.myAccount;
   private credentialsService = inject(CredentialsService);
   credentials$ = this.credentialsService.credentials$;
   checkIcon = faCheck;

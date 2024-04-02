@@ -13,6 +13,8 @@ import { AsyncPipe } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
 import { OutsideClickDirective } from '../../directives/outside-click.directive';
 import { UserService } from '../../user/services/user.service';
+import { PATHS } from '../../paths';
+
 @Component({
   selector: 'app-navigation',
   standalone: true,
@@ -29,6 +31,13 @@ import { UserService } from '../../user/services/user.service';
   styleUrl: './navigation.component.scss',
 })
 export class NavigationComponent {
+  blogPath = '/' + PATHS.blog;
+  pricingPath = '/' + PATHS.pricing;
+  aboutUsPath = '/' + PATHS.aboutUs;
+  myAccountPath = '/' + PATHS.myAccount;
+  loginPath = '/' + PATHS.login;
+  joinUsPath = '/' + PATHS.joinUs;
+
   private authService = inject(AuthService);
   private toastr = inject(ToastrService);
   user$ = inject(UserService).user$;

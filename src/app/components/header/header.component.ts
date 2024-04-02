@@ -8,6 +8,7 @@ import { OutsideClickDirective } from '../../directives/outside-click.directive'
 import { AuthService } from '../../auth/services/auth.service';
 import { AsyncPipe } from '@angular/common';
 import { UserService } from '../../user/services/user.service';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-header',
@@ -25,6 +26,8 @@ import { UserService } from '../../user/services/user.service';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  loginPath = '/' + PATHS.login;
+  joinUsPath = '/' + PATHS.joinUs;
   isAuthorized$ = inject(AuthService).isAuthorized$;
   user$ = inject(UserService).user$;
 

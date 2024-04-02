@@ -8,6 +8,7 @@ import { AuthService } from '../../auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../user/services/user.service';
 import { AsyncPipe } from '@angular/common';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-mini-profile',
@@ -17,6 +18,7 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './mini-profile.component.scss',
 })
 export class MiniProfileComponent {
+  myAccountPath = '/' + PATHS.myAccount;
   private authService = inject(AuthService);
   private toastr = inject(ToastrService);
   user$ = inject(UserService).user$;

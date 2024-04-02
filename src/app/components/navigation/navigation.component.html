@@ -24,17 +24,17 @@
     }
     <ul class="navigation__mobile-menu" (click)="toggleMenu()">
       <li class="navigation__mobile-menu-item">
-        <a routerLink="/blog" routerLinkActive="active">Blog</a>
+        <a [routerLink]="blogPath" routerLinkActive="active">Blog</a>
       </li>
       <li class="navigation__mobile-menu-item">
-        <a routerLink="/pricing" routerLinkActive="active">Pricing</a>
+        <a [routerLink]="pricingPath" routerLinkActive="active">Pricing</a>
       </li>
       <li class="navigation__mobile-menu-item">
-        <a routerLink="/about-us" routerLinkActive="active">About Us</a>
+        <a [routerLink]="aboutUsPath" routerLinkActive="active">About Us</a>
       </li>
       @if (isAuthorized$ | async) {
       <li class="navigation__mobile-menu-item">
-        <a routerLink="/my-account" routerLinkActive="active">My Account</a>
+        <a [routerLink]="myAccountPath" routerLinkActive="active">My Account</a>
       </li>
       }
     </ul>
@@ -47,7 +47,7 @@
     <nav class="navigation__login-buttons">
       <app-button
         class="navigation__login-btn"
-        routerLink="/login"
+        [routerLink]="loginPath"
         styleType="prime-transparent"
         type="button"
         (click)="toggleMenu()"
@@ -55,7 +55,7 @@
       >
       <app-button
         class="navigation__login-btn"
-        routerLink="/join-us"
+        [routerLink]="joinUsPath"
         type="button"
         (click)="toggleMenu()"
         >Join us</app-button
@@ -76,13 +76,13 @@
   }
   <ul class="navigation__menu">
     <li class="navigation__menu-item">
-      <a routerLink="/blog" routerLinkActive="active">Blog</a>
+      <a [routerLink]="blogPath" routerLinkActive="active">Blog</a>
     </li>
     <li class="navigation__menu-item">
-      <a routerLink="/pricing" routerLinkActive="active">Pricing</a>
+      <a [routerLink]="pricingPath" routerLinkActive="active">Pricing</a>
     </li>
     <li class="navigation__menu-item">
-      <a routerLink="/about-us" routerLinkActive="active">About Us</a>
+      <a [routerLink]="aboutUsPath" routerLinkActive="active">About Us</a>
     </li>
   </ul>
 </nav>

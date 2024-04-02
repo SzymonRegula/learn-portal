@@ -1,7 +1,7 @@
 <header class="my-trainers__header">
   <h2 class="my-trainers__heading">My Trainers</h2>
   @if (addTrainer) {
-  <app-button class="my-trainers__button" routerLink="/add-trainer"
+  <app-button class="my-trainers__button" [routerLink]="addTrainerPath"
     >Add trainer</app-button
   >
   }

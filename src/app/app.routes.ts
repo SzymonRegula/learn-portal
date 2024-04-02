@@ -13,67 +13,68 @@ import { authorizedGuard } from './auth/guards/authorized.guard';
 import { notAuthorizedGuard } from './auth/guards/not-authorized.guard';
 import { studentGuard } from './user/guards/student.guard';
 import { TrainerAddPageComponent } from './pages/trainer-add-page/trainer-add-page.component';
+import { PATHS } from './paths';
 
 export const routes: Routes = [
   {
-    path: 'change-password',
+    path: PATHS.changePassword,
     title: 'Change password',
     component: ChangePasswordPageComponent,
     canActivate: [authorizedGuard],
   },
   {
-    path: 'home',
+    path: PATHS.home,
     title: 'Home',
     component: HomePageComponent,
   },
   {
-    path: 'join-us',
+    path: PATHS.joinUs,
     title: 'Join us',
     component: JoinUsPageComponent,
     canActivate: [notAuthorizedGuard],
   },
   {
-    path: 'login',
+    path: PATHS.login,
     title: 'Login',
     component: LoginPageComponent,
     canActivate: [notAuthorizedGuard],
   },
   {
-    path: 'my-account',
+    path: PATHS.myAccount,
     title: 'My account',
     component: MyAccountPageComponent,
     canActivate: [authorizedGuard],
   },
   {
-    path: 'registration/:role',
+    path: PATHS.registration + '/:role',
     title: 'Registration',
     component: RegistrationPageComponent,
     canActivate: [notAuthorizedGuard],
   },
   {
-    path: 'registration-verification',
+    path: PATHS.registrationVerification,
     title: 'Registration verification',
     component: RegistrationVerificationPageComponent,
   },
   {
-    path: 'training',
-    title: 'Training',
+    path: PATHS.trainings,
+    title: 'Trainings',
     component: TrainingPageComponent,
     canActivate: [authorizedGuard],
   },
   {
-    path: 'add-training',
+    path: PATHS.addTraining,
     title: 'Add training',
     component: TrainingAddPageComponent,
     canActivate: [authorizedGuard, studentGuard],
   },
   {
-    path: 'add-trainer',
+    path: PATHS.addTrainer,
     title: 'Add trainer',
     component: TrainerAddPageComponent,
     canActivate: [authorizedGuard, studentGuard],
   },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: PATHS.home, pathMatch: 'full' },
   {
     path: '**',
     title: 'Not found',

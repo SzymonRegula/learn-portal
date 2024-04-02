@@ -3,6 +3,7 @@ import { ButtonComponent } from '../button/button.component';
 import { RouterLink } from '@angular/router';
 import { TrainersService } from '../../services/trainers.service';
 import { AsyncPipe } from '@angular/common';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-my-trainers',
@@ -12,6 +13,7 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './my-trainers.component.scss',
 })
 export class MyTrainersComponent {
+  addTrainerPath = '/' + PATHS.addTrainer;
   @Input() addTrainer: boolean = false;
 
   private trainersService = inject(TrainersService);
