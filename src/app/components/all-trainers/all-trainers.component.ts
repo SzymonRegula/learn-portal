@@ -39,7 +39,6 @@ export class AllTrainersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.notMyTrainers$.subscribe((trainers) => {
-      console.log(trainers);
       const form: { [key: string]: FormControl } = {};
       trainers.forEach((trainer) => {
         form[trainer.id] = this.fb.control(false);

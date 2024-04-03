@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="dataSource" class="table">
+<table mat-table [dataSource]="(trainings$ | async)!" class="table">
   <ng-container matColumnDef="date">
     <th class="table__header-cell" mat-header-cell *matHeaderCellDef>DATE</th>
     <td class="table__cell" mat-cell *matCellDef="let element">
@@ -28,14 +28,16 @@
     </td>
   </ng-container>
 
+  @if (( tokenPayload$ | async)?.role ; as role) {
   <ng-container matColumnDef="name">
     <th class="table__header-cell" mat-header-cell *matHeaderCellDef>
-      {{ studentView ? "TRAINER NAME" : "STUDENT NAME" }}
+      {{ role === "student" ? "TRAINER NAME" : "STUDENT NAME" }}
     </th>
     <td class="table__cell" mat-cell *matCellDef="let element">
-      {{ element.name }}
+      {{ role === "student" ? element.trainerName : element.studentName }}
     </td>
   </ng-container>
+  }
 
   <ng-container matColumnDef="duration">
     <th class="table__header-cell" mat-header-cell *matHeaderCellDef>

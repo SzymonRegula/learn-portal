@@ -6,6 +6,7 @@
   ></fa-icon>
   <input
     class="date-picker__input {{ 'date-picker__input--' + size }}"
+    [id]="id"
     matInput
     [matDatepicker]="picker"
     (focus)="picker.open()"

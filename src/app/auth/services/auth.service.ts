@@ -14,14 +14,20 @@ type LoginData = {
   password: string;
 };
 
+type TokenPayload = {
+  userId: string;
+  role: Role;
+  roleId: string;
+};
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private isAuthorized$$ = new BehaviorSubject<boolean>(false);
   isAuthorized$ = this.isAuthorized$$.asObservable();
-  private role$$ = new BehaviorSubject<Role | null>(null);
-  role$ = this.role$$.asObservable();
+  private tokenPayload$$ = new BehaviorSubject<TokenPayload | null>(null);
+  tokenPayload$ = this.tokenPayload$$.asObservable();
 
   constructor(
     private userService: UserService,
@@ -32,14 +38,14 @@ export class AuthService {
   ) {
     const token = this.sessionStorageService.getToken();
     if (token) {
-      const decodedJwt = jwtDecode<JwtPayload & { role: Role }>(token);
+      const decodedJwt = jwtDecode<JwtPayload & TokenPayload>(token);
 
       if (decodedJwt.exp! * 1000 < Date.now()) {
         this.sessionStorageService.removeToken();
         return;
       }
 
-      this.setState(decodedJwt.role);
+      this.setState(decodedJwt);
 
       this.userService.getUser().subscribe();
     }
@@ -47,12 +53,12 @@ export class AuthService {
 
   login(loginData: LoginData) {
     return this.http
-      .post<string>(`${environment.apiUrl}/auth/login`, loginData)
+      .post<string>(`${environment.userServiceUrl}/auth/login`, loginData)
       .pipe(
         tap((token) => {
           this.sessionStorageService.saveToken(token);
-          const decodedJwt = jwtDecode<JwtPayload & { role: Role }>(token);
-          this.setState(decodedJwt.role);
+          const decodedJwt = jwtDecode<JwtPayload & TokenPayload>(token);
+          this.setState(decodedJwt);
         }),
         switchMap(() => this.userService.getUser()),
         catchError(this.errorService.handleError)
@@ -65,8 +71,17 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
-  private setState(role: Role | null) {
-    this.role$$.next(role);
-    role ? this.isAuthorized$$.next(true) : this.isAuthorized$$.next(false);
+  private setState(token: (JwtPayload & TokenPayload) | null) {
+    if (token) {
+      this.tokenPayload$$.next({
+        userId: token.userId,
+        role: token.role,
+        roleId: token.roleId,
+      });
+      this.isAuthorized$$.next(true);
+    } else {
+      this.tokenPayload$$.next(null);
+      this.isAuthorized$$.next(false);
+    }
   }
 }

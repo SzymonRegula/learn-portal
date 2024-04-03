@@ -25,7 +25,7 @@ export class TrainersService {
 
   getActiveTrainers() {
     return this.http
-      .get<Trainer[]>(`${environment.apiUrl}/users/trainers`)
+      .get<Trainer[]>(`${environment.userServiceUrl}/users/trainers`)
       .pipe(
         tap((trainers) => this.activeTrainers$$.next(trainers)),
         catchError(this.errorService.handleError)

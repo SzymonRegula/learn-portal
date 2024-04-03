@@ -4,11 +4,12 @@ import {
   BreadcrumbsComponent,
 } from '../../components/breadcrumbs/breadcrumbs.component';
 import { PATHS } from '../../paths';
+import { ButtonComponent } from '../../components/button/button.component';
 
 @Component({
   selector: 'app-training-add-page',
   standalone: true,
-  imports: [BreadcrumbsComponent],
+  imports: [BreadcrumbsComponent, ButtonComponent],
   templateUrl: './training-add-page.component.html',
   styleUrl: './training-add-page.component.scss',
 })

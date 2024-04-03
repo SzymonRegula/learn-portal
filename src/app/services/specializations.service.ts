@@ -23,7 +23,7 @@ export class SpecializationsService {
   getSpecializations() {
     return this.http
       .get<Specialization[]>(
-        `${environment.apiUrl}/users/trainers/specializations`
+        `${environment.userServiceUrl}/users/trainers/specializations`
       )
       .pipe(
         tap((specializations) => this.specializations$$.next(specializations)),

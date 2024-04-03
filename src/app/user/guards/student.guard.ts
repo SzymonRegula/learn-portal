@@ -7,7 +7,9 @@ export const studentGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthService);
 
-  return authService.role$.pipe(
-    map((role) => (role === 'student' ? true : router.parseUrl('/')))
+  return authService.tokenPayload$.pipe(
+    map((payload) =>
+      payload?.role === 'student' ? true : router.parseUrl('/')
+    )
   );
 };

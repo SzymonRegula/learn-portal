@@ -13,6 +13,7 @@ type User = {
   username: string;
   isActive: boolean;
   role: Role;
+  roleId: string;
   photo: string;
 
   address?: string;
@@ -35,10 +36,9 @@ export class UserService {
   private errorService = inject(ErrorHandlingService);
 
   getUser() {
-    return this.http.get<User>(`${environment.apiUrl}/users/me`).pipe(
+    return this.http.get<User>(`${environment.userServiceUrl}/users/me`).pipe(
       tap((user) => {
         this.user$$.next(user);
-        console.log(user);
       }),
       catchError(this.errorService.handleError)
     );
@@ -46,12 +46,12 @@ export class UserService {
 
   registerUser(data: unknown) {
     return this.http
-      .post(`${environment.apiUrl}/auth/register`, data)
+      .post(`${environment.userServiceUrl}/auth/register`, data)
       .pipe(catchError(this.errorService.handleError));
   }
 
   deleteUser() {
-    return this.http.delete(`${environment.apiUrl}/users/me`).pipe(
+    return this.http.delete(`${environment.userServiceUrl}/users/me`).pipe(
       tap(() => {
         this.user$$.next(null);
       }),
@@ -60,9 +60,8 @@ export class UserService {
   }
 
   updateUser(data: unknown) {
-    return this.http.patch(`${environment.apiUrl}/users/me`, data).pipe(
+    return this.http.patch(`${environment.userServiceUrl}/users/me`, data).pipe(
       tap((updatedData) => {
-        console.log(updatedData);
         const updatedUser = { ...this.user$$.value, ...updatedData } as User;
         return this.user$$.next(updatedUser);
       }),
@@ -72,13 +71,13 @@ export class UserService {
 
   changePassword(data: { currentPassword: string; newPassword: string }) {
     return this.http
-      .put(`${environment.apiUrl}/users/update-password`, data)
+      .put(`${environment.userServiceUrl}/users/update-password`, data)
       .pipe(catchError(this.errorService.handleError));
   }
 
   addTrainer(trainerId: string) {
     return this.http
-      .post(`${environment.apiUrl}/users/trainers`, { trainerId })
+      .post(`${environment.userServiceUrl}/users/trainers`, { trainerId })
       .pipe(catchError(this.errorService.handleError));
   }
 }

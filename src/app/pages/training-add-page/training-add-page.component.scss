@@ -1,0 +1,37 @@
+@import "variables";
+
+.training-add-page {
+  margin: 24px auto 132px auto;
+  width: 90%;
+  max-width: $screen-lg;
+
+  &__heading {
+    margin-bottom: 52px;
+    font-family: $font-family-secondary;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 78px;
+    color: $color-neutral-900;
+    text-align: center;
+  }
+
+  &__subheading {
+    font-family: $font-family-secondary;
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: 700;
+    color: $color-neutral-900;
+    margin-bottom: 36px;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__button {
+    height: 44px;
+    width: fit-content;
+    margin-bottom: 62px;
+  }
+}

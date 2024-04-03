@@ -157,8 +157,6 @@ export class MyAccountComponent implements OnInit {
       return;
     }
 
-    console.log(changedValues);
-
     this.userService.updateUser(changedValues).subscribe({
       next: () => {
         this.toastr.success('Profile updated successfully!');

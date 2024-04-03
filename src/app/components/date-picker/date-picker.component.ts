@@ -29,6 +29,8 @@ export class DatePickerComponent {
   @Output() dateChange = new EventEmitter<Date>();
   @Input() size: Size = 'medium';
   @Input() date: Date | null = null;
+  @Input() id: string = '';
+
   icon = faCalendar;
 
   onDateChange(event: MatDatepickerInputEvent<Date>) {

@@ -8,6 +8,9 @@ import { TrainersService } from '../../services/trainers.service';
 import { AuthService } from '../../auth/services/auth.service';
 import { first, switchMap } from 'rxjs';
 import { SpecializationsService } from '../../services/specializations.service';
+import { ButtonComponent } from '../../components/button/button.component';
+import { RouterLink } from '@angular/router';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-my-account-page',
@@ -16,23 +19,26 @@ import { SpecializationsService } from '../../services/specializations.service';
     MyAccountComponent,
     MyTrainersComponent,
     MyStudentsComponent,
+    ButtonComponent,
     AsyncPipe,
+    RouterLink,
   ],
   templateUrl: './my-account-page.component.html',
   styleUrl: './my-account-page.component.scss',
 })
 export class MyAccountPageComponent implements OnInit {
+  trainingsPath = '/' + PATHS.trainings;
   user$ = inject(UserService).user$;
   authService = inject(AuthService);
   trainersService = inject(TrainersService);
   specializationsService = inject(SpecializationsService);
 
   ngOnInit(): void {
-    this.authService.role$
+    this.authService.tokenPayload$
       .pipe(
         first(),
-        switchMap((role) =>
-          role === 'student'
+        switchMap((payload) =>
+          payload?.role === 'student'
             ? this.trainersService.getActiveTrainers()
             : this.specializationsService.getSpecializations()
         )
