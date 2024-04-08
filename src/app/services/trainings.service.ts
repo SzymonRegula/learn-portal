@@ -5,7 +5,7 @@ import { ErrorHandlingService } from './error-handling.service';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../auth/services/auth.service';
 
-type Training = {
+export type Training = {
   id: number;
   name: string;
   studentId: string;
@@ -30,12 +30,19 @@ export type SearchParams = {
   to?: string;
 };
 
+export type TrainingType = {
+  id: string;
+  trainingType: string;
+};
+
 @Injectable({
   providedIn: 'root',
 })
 export class TrainingsService {
   private searchTrainings$$ = new BehaviorSubject<Training[]>([]);
   searchTrainings$ = this.searchTrainings$$.asObservable();
+  private trainingTypes$$ = new BehaviorSubject<TrainingType[]>([]);
+  trainingTypes$ = this.trainingTypes$$.asObservable();
 
   private http = inject(HttpClient);
   private errorService = inject(ErrorHandlingService);
@@ -61,5 +68,22 @@ export class TrainingsService {
           )
       )
     );
+  }
+
+  getTrainingTypes() {
+    return this.http
+      .get<TrainingType[]>(`${environment.trainingServiceUrl}/trainings/types`)
+      .pipe(
+        tap((types) => {
+          this.trainingTypes$$.next(types);
+        }),
+        catchError(this.errorService.handleError)
+      );
+  }
+
+  addTraining(training: Omit<Training, 'id'>) {
+    return this.http
+      .post(`${environment.trainingServiceUrl}/trainings`, training)
+      .pipe(catchError(this.errorService.handleError));
   }
 }

@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { Role } from '../../models/role.model';
 import { ErrorHandlingService } from '../../services/error-handling.service';
 
-type User = {
+export type User = {
   id: string;
   firstName: string;
   lastName: string;

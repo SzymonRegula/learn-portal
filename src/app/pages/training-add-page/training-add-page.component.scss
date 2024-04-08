@@ -21,17 +21,6 @@
     line-height: 36px;
     font-weight: 700;
     color: $color-neutral-900;
-    margin-bottom: 36px;
-  }
-
-  &__buttons {
-    display: flex;
-    gap: 8px;
-  }
-
-  &__button {
-    height: 44px;
-    width: fit-content;
-    margin-bottom: 62px;
+    margin-bottom: 16px;
   }
 }

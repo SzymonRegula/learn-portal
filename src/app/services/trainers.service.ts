@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { ErrorHandlingService } from './error-handling.service';
 import { UserService } from '../user/services/user.service';
 
-type Trainer = {
+export type Trainer = {
   id: string;
   firstName: string;
   lastName: string;

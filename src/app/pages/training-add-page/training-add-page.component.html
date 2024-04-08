@@ -2,15 +2,5 @@
   <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
   <h1 class="training-add-page__heading">Add passed training</h1>
   <h2 class="training-add-page__subheading">Training</h2>
-  <form>
-    <div class="training-add-page__controls"></div>
-    <div class="training-add-page__buttons">
-      <app-button
-        class="training-add-page__button"
-        styleType="neutral-transparent"
-        >Cancel</app-button
-      >
-      <app-button class="training-add-page__button">Add</app-button>
-    </div>
-  </form>
+  <app-add-training-form (cancel)="onCancel()"></app-add-training-form>
 </div>
