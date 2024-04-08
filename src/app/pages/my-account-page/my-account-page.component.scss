@@ -24,10 +24,11 @@
       width: 100%;
     }
 
-    app-my-trainers {
+    app-my-trainers,
+    app-my-students {
       padding: 32px;
+      flex: 0 0 428px;
       max-width: 428px;
-      flex-shrink: 0;
     }
   }
 

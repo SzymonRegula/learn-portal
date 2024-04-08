@@ -6,11 +6,12 @@ import { AsyncPipe } from '@angular/common';
 import { MyStudentsComponent } from '../../components/my-students/my-students.component';
 import { TrainersService } from '../../services/trainers.service';
 import { AuthService } from '../../auth/services/auth.service';
-import { first, switchMap } from 'rxjs';
+import { first, forkJoin, switchMap } from 'rxjs';
 import { SpecializationsService } from '../../services/specializations.service';
 import { ButtonComponent } from '../../components/button/button.component';
 import { RouterLink } from '@angular/router';
 import { PATHS } from '../../paths';
+import { StudentsService } from '../../services/students.service';
 
 @Component({
   selector: 'app-my-account-page',
@@ -32,17 +33,29 @@ export class MyAccountPageComponent implements OnInit {
   authService = inject(AuthService);
   trainersService = inject(TrainersService);
   specializationsService = inject(SpecializationsService);
+  studentsService = inject(StudentsService);
+
+  editMode: boolean = false;
 
   ngOnInit(): void {
     this.authService.tokenPayload$
       .pipe(
         first(),
-        switchMap((payload) =>
-          payload?.role === 'student'
-            ? this.trainersService.getActiveTrainers()
-            : this.specializationsService.getSpecializations()
-        )
+        switchMap((payload) => {
+          if (payload?.role === 'student') {
+            return this.trainersService.getActiveTrainers();
+          } else {
+            return forkJoin([
+              this.studentsService.getMyStudents(),
+              this.specializationsService.getSpecializations(),
+            ]);
+          }
+        })
       )
       .subscribe();
+  }
+
+  onChangeEditMode(editMode: boolean) {
+    this.editMode = editMode;
   }
 }

@@ -1,13 +1,14 @@
 <div class="my-account-page">
   <h1 class="my-account-page__heading">My Account</h1>
   <section class="my-account-page__container">
-    <app-my-account></app-my-account>
-    @if ((user$|async)?.role === "student") {
+    <app-my-account (changeMode)="onChangeEditMode($event)"></app-my-account>
+    @if ( !editMode ) { @if ((user$|async)?.role === "student") {
     <app-my-trainers [addTrainer]="true"></app-my-trainers>
     } @if ((user$|async)?.role === "trainer") {
     <app-my-students></app-my-students>
-    }
+    } }
   </section>
+  @if (!editMode) {
   <section class="my-account-page__trainings">
     <h1 class="my-account-page__heading">My Trainings</h1>
     <div class="my-account-page__text">
@@ -20,4 +21,5 @@
       >View trainings</app-button
     >
   </section>
+  }
 </div>

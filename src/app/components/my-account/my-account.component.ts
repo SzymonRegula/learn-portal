@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -51,6 +51,7 @@ type UpdateData = {
   styleUrl: './my-account.component.scss',
 })
 export class MyAccountComponent implements OnInit {
+  @Output() changeMode = new EventEmitter<boolean>();
   changePasswordPath = '/' + PATHS.changePassword;
 
   private fb = inject(FormBuilder);
@@ -175,6 +176,7 @@ export class MyAccountComponent implements OnInit {
 
   changeModeHandler() {
     this.editMode = !this.editMode;
+    this.changeMode.emit(this.editMode);
     this.profileForm.reset();
     this.setFormValues();
   }

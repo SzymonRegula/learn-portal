@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (trainer of myTrainers$ | async; track $index) {
+    @for (trainer of myTrainers$ | async; track trainer.id) {
     <tr>
       <td>{{ trainer.firstName }} {{ trainer.lastName }}</td>
       <td>{{ trainer.specialization }}</td>
