@@ -16,6 +16,7 @@
   }
 
   &__nav {
+    overflow-x: auto;
     margin-left: 66px;
     width: 100%;
   }
@@ -50,6 +51,7 @@
     width: 52px;
     height: 52px;
     border-radius: 26px;
+    object-fit: cover;
     background: $color-primary-200;
   }
 
@@ -68,6 +70,10 @@
     &__buttons {
       margin-right: 15px;
       gap: 5px;
+    }
+
+    &__username {
+      display: none;
     }
   }
 

@@ -7,6 +7,8 @@ import { MiniProfileComponent } from '../mini-profile/mini-profile.component';
 import { OutsideClickDirective } from '../../directives/outside-click.directive';
 import { AuthService } from '../../auth/services/auth.service';
 import { AsyncPipe } from '@angular/common';
+import { UserService } from '../../user/services/user.service';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-header',
@@ -24,14 +26,12 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  private authService = inject(AuthService);
-  isAuthorized$ = this.authService.isAuthorized$;
+  loginPath = '/' + PATHS.login;
+  joinUsPath = '/' + PATHS.joinUs;
+  isAuthorized$ = inject(AuthService).isAuthorized$;
+  user$ = inject(UserService).user$;
 
   miniProfileOpen = false;
-  user = {
-    username: 'Jihn_12',
-    imageSrc: 'assets/avatar-john.jpg',
-  };
 
   toggleMiniProfile() {
     this.miniProfileOpen = !this.miniProfileOpen;

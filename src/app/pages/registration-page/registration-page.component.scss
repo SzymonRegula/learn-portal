@@ -21,4 +21,15 @@
     color: $color-neutral-500;
     margin-bottom: 39px;
   }
+
+  @media (max-width: $screen-sm) {
+    &__heading {
+      font-size: 36px;
+      font-weight: 700;
+    }
+
+    &__role {
+      font-size: 16px;
+    }
+  }
 }

@@ -2,11 +2,15 @@
 
 .modal-box {
   max-width: $screen-sm;
+  padding: 24px;
+  box-shadow: $shadow-m;
+  border-radius: $border-radius-l;
 
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 12px;
   }
 
   &__heading {
@@ -15,6 +19,10 @@
     font-weight: 700;
     line-height: 36px;
     color: $color-neutral-900;
+  }
+
+  &__close-button {
+    align-self: start;
   }
 
   &__close-icon {
@@ -41,5 +49,33 @@
   &__action {
     height: 36px;
     font-size: 14px;
+  }
+
+  @media (max-width: $screen-md) {
+    &__heading {
+      font-size: 20px;
+    }
+
+    &__content {
+      font-size: 12px;
+    }
+
+    &__action {
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: $screen-sm) {
+    &__heading {
+      font-size: 18px;
+    }
+
+    &__content {
+      font-size: 10px;
+    }
+
+    &__action {
+      font-size: 10px;
+    }
   }
 }

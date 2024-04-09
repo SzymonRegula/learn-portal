@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../auth/services/auth.service';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-login-form',
@@ -27,6 +28,7 @@ import { AuthService } from '../../auth/services/auth.service';
   styleUrl: './login-form.component.scss',
 })
 export class LoginFormComponent {
+  joinUsPath = '/' + PATHS.joinUs;
   userIcon = faUser;
   lockIcon = faLock;
   eyeIcon = faEyeSlash;
@@ -34,6 +36,7 @@ export class LoginFormComponent {
   isLoading = false;
   siteKey = environment.recaptchaV2SiteKey;
   captchaResponse: string | null = null;
+
   private toastr = inject(ToastrService);
   private authService = inject(AuthService);
   private router = inject(Router);
@@ -48,17 +51,26 @@ export class LoginFormComponent {
 
     // TODO: Validate captcha with backend
 
-    // Simulate a server call
-    setTimeout(() => {
-      console.log(form.value);
-      this.isLoading = false;
-      this.authService.login({
+    this.authService
+      .login({
         username: form.value.username,
         password: form.value.password,
+      })
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.toastr.success('Logged in successfully!');
+          this.router.navigate(['/']);
+        },
+        error: (error) => {
+          if (error.status === 401) {
+            this.toastr.error('Invalid credentials!');
+          } else {
+            this.toastr.error('An error occurred!');
+          }
+          this.isLoading = false;
+        },
       });
-      this.toastr.success('Logged in successfully!');
-      this.router.navigate(['/']);
-    }, 1000);
   }
 
   resolved(captchaResponse: string | null) {

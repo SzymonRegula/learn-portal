@@ -45,11 +45,16 @@
 
   &__opened-mobile {
     display: none;
-    position: absolute;
+    position: fixed;
     z-index: 10;
     top: 0;
     left: 4px;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
     background-color: $color-white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
   }
@@ -62,9 +67,10 @@
   }
 
   &__avatar {
-    width: 51px;
-    height: 51px;
+    width: 52px;
+    height: 52px;
     border-radius: 26px;
+    object-fit: cover;
     background: $color-primary-200;
   }
 

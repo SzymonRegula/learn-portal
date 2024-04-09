@@ -22,6 +22,8 @@
           id="first-name"
           placeholder="Input text"
           required
+          minlength="2"
+          maxlength="30"
           name="firstName"
           ngModel
           #firstName="ngModel"
@@ -43,6 +45,8 @@
           id="last-name"
           placeholder="Input text"
           required
+          minlength="2"
+          maxlength="30"
           name="lastName"
           ngModel
           #lastName="ngModel"
@@ -63,6 +67,7 @@
           id="email"
           placeholder="Input text"
           required
+          email
           name="email"
           ngModel
           #email="ngModel"
@@ -81,17 +86,17 @@
         >
         <select
           class="registration-form__input registration-form__input--select"
-          type="specialization"
+          type="text"
           id="specialization"
           required
-          name="specialization"
+          name="specializationId"
           ngModel
           #specialization="ngModel"
         >
           <option value="" disabled selected>Please select</option>
-          <option value="1">Opcja 1</option>
-          <option value="2">Opcja 2</option>
-          <option value="3">Opcja 3</option>
+          @for (spec of specializations$ | async; track $index) {
+          <option [value]="spec.id">{{ spec.specialization }}</option>
+          }
         </select>
       </div>
       } @else if (role === 'student') {
@@ -101,23 +106,24 @@
         >
         <input
           class="registration-form__input"
-          type="birth"
+          type="text"
           id="birth"
           placeholder="Input text"
-          name="birth"
+          name="dateOfBirth"
+          appDdmmyyyyValidator
           ngModel
         />
       </div>
       <div class="registration-form__control">
-        <label class="registration-form__label" for="adress"
-          >Adress (optional)</label
+        <label class="registration-form__label" for="address"
+          >Address (optional)</label
         >
         <input
           class="registration-form__input"
-          type="adress"
-          id="adress"
+          type="text"
+          id="address"
           placeholder="Input text"
-          name="adress"
+          name="address"
           ngModel
         />
       </div>

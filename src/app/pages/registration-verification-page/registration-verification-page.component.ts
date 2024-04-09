@@ -1,18 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { ButtonComponent } from '../../components/button/button.component';
 import { RouterLink } from '@angular/router';
+import { CredentialsService } from '../../services/credentials.service';
+import { AsyncPipe } from '@angular/common';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-registration-verification-page',
   standalone: true,
-  imports: [FontAwesomeModule, ButtonComponent, RouterLink],
+  imports: [FontAwesomeModule, ButtonComponent, RouterLink, AsyncPipe],
   templateUrl: './registration-verification-page.component.html',
   styleUrl: './registration-verification-page.component.scss',
 })
-export class RegistrationVerificationPageComponent {
+export class RegistrationVerificationPageComponent implements OnDestroy {
+  myAccountPath = '/' + PATHS.myAccount;
+  private credentialsService = inject(CredentialsService);
+  credentials$ = this.credentialsService.credentials$;
   checkIcon = faCheck;
-  username = 'John Doe';
-  password = '12345678';
+
+  ngOnDestroy(): void {
+    this.credentialsService.deleteCredentials();
+  }
 }

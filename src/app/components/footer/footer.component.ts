@@ -11,6 +11,7 @@ import {
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { FormsModule, NgModel } from '@angular/forms';
+import { PATHS } from '../../paths';
 
 @Component({
   selector: 'app-footer',
@@ -26,6 +27,7 @@ import { FormsModule, NgModel } from '@angular/forms';
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
+  PATHS = PATHS;
   xIcon = faXTwitter;
   fbIcon = faFacebook;
   ytIcon = faYoutube;

@@ -2,12 +2,14 @@
   <div class="mini-profile__user">
     <img
       class="mini-profile__avatar"
-      [src]="user.imageSrc"
+      [src]="(user$ | async)?.photo || 'assets/avatar.png'"
       alt="user's avatar"
     />
     <div class="mini-profile__data">
-      <p class="mini-profile__username">{{ user.username }}</p>
-      <p class="mini-profile__email">{{ user.email }}</p>
+      <p class="mini-profile__username">
+        {{ (user$ | async)?.username }}
+      </p>
+      <p class="mini-profile__email">{{ (user$ | async)?.email }}</p>
     </div>
   </div>
 
@@ -16,7 +18,7 @@
   <div class="mini-profile__actions">
     <a
       class="mini-profile__action mini-profile__action--my-account"
-      routerLink="/my-account"
+      [routerLink]="myAccountPath"
     >
       <fa-icon
         class="mini-profile__icon"

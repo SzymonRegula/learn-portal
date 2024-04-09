@@ -1,0 +1,106 @@
+<form class="add-training-form" (ngSubmit)="onAddTraining()" [formGroup]="form">
+  <div class="add-training-form__controls">
+    <div class="add-training-form__controls--left">
+      <div class="add-training-form__control">
+        <label class="add-training-form__label" for="name">Name</label>
+        <input
+          class="add-training-form__input"
+          type="text"
+          id="name"
+          placeholder="Enter name"
+          required
+          name="name"
+          formControlName="name"
+        />
+      </div>
+
+      <div class="add-training-form__control">
+        <label class="add-training-form__label" for="date"
+          >Training start date</label
+        >
+        <app-date-picker
+          (dateChange)="onDateChange($event)"
+          [id]="'date'"
+          size="large"
+        ></app-date-picker>
+      </div>
+
+      <div class="add-training-form__control">
+        <label class="add-training-form__label" for="duration"
+          >Duration (days)</label
+        >
+        <input
+          class="add-training-form__input"
+          type="number"
+          id="duration"
+          placeholder="Enter duration"
+          required
+          name="duration"
+          formControlName="duration"
+        />
+      </div>
+
+      <div class="add-training-form__control">
+        <label class="add-training-form__label" for="type">Type</label>
+        <select
+          class="add-training-form__input"
+          name="type"
+          id="type"
+          required
+          formControlName="type"
+        >
+          <option value="" disabled selected>Select type</option>
+          @for (type of trainingTypes$ | async; track type.id ) {
+          <option [value]="type | json">{{ type.trainingType }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="add-training-form__control">
+        <label class="add-training-form__label" for="description"
+          >Description</label
+        >
+        <textarea
+          class="add-training-form__textarea"
+          type="text"
+          id="description"
+          name="description"
+          rows="5"
+          placeholder="Enter description"
+          formControlName="description"
+        ></textarea>
+      </div>
+    </div>
+    <div class="add-training-form__controls--right">
+      <div class="add-training-form__control">
+        <label class="add-training-form__label" for="trainer"
+          >Add trainer</label
+        >
+        <select
+          class="add-training-form__input"
+          name="trainer"
+          id="trainer"
+          required
+          formControlName="trainer"
+        >
+          <option value="" disabled selected>Select trainer</option>
+          @for (trainer of trainers$ | async; track trainer.id) {
+          <option [value]="trainer | json">
+            {{ trainer.firstName + " " + trainer.lastName }}
+          </option>
+          }
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="add-training-form__buttons">
+    <app-button
+      class="add-training-form__button"
+      styleType="neutral-transparent"
+      type="button"
+      (click)="onCancel()"
+      >Cancel</app-button
+    >
+    <app-button class="add-training-form__button" type="submit">Add</app-button>
+  </div>
+</form>

@@ -11,15 +11,19 @@
   </div>
   <div class="registration-verification-page__credential-container">
     <p class="registration-verification-page__credential-name">Username</p>
-    <p class="registration-verification-page__credential">{{ username }}</p>
+    <p class="registration-verification-page__credential">
+      {{ (credentials$ | async)?.username }}
+    </p>
   </div>
   <div class="registration-verification-page__credential-container">
     <p class="registration-verification-page__credential-name">Password</p>
-    <p class="registration-verification-page__credential">{{ password }}</p>
+    <p class="registration-verification-page__credential">
+      {{ (credentials$ | async)?.password }}
+    </p>
   </div>
   <app-button
     class="registration-verification-page__button"
-    routerLink="/my-account"
+    [routerLink]="myAccountPath"
     >My account</app-button
   >
 </div>

@@ -1,13 +1,15 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { UserService } from '../services/user.service';
 import { map } from 'rxjs';
+import { AuthService } from '../../auth/services/auth.service';
 
 export const studentGuard: CanActivateFn = (route, state) => {
-  const userService = inject(UserService);
   const router = inject(Router);
+  const authService = inject(AuthService);
 
-  return userService.userType$.pipe(
-    map((userType) => (userType === 'student' ? true : false))
+  return authService.tokenPayload$.pipe(
+    map((payload) =>
+      payload?.role === 'student' ? true : router.parseUrl('/')
+    )
   );
 };

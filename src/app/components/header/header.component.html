@@ -12,10 +12,10 @@
     class="header__user"
     (click)="toggleMiniProfile(); $event.stopPropagation()"
   >
-    <span class="header__username">{{ user.username }}</span>
+    <span class="header__username">{{ (user$ | async)?.username }}</span>
     <img
       class="header__user-avatar"
-      [src]="user.imageSrc"
+      [src]="(user$ | async)?.photo || 'assets/avatar.png'"
       alt="user's avatar"
     />
   </button>
@@ -25,10 +25,10 @@
       class="header__button"
       type="button"
       styleType="prime-transparent"
-      routerLink="/login"
+      [routerLink]="loginPath"
       >Sign in</app-button
     >
-    <app-button class="header__button" type="button" routerLink="/join-us">
+    <app-button class="header__button" type="button" [routerLink]="joinUsPath">
       Join us</app-button
     >
   </div>
