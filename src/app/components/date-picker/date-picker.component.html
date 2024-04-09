@@ -1,0 +1,18 @@
+<div class="date-picker {{ 'date-picker--' + size }}" (click)="picker.open()">
+  <fa-icon
+    class="date-picker__icon {{ 'date-picker__icon--' + size }}"
+    [icon]="icon"
+    [size]="size === 'large' ? 'lg' : undefined"
+  ></fa-icon>
+  <input
+    class="date-picker__input {{ 'date-picker__input--' + size }}"
+    [id]="id"
+    matInput
+    [matDatepicker]="picker"
+    (focus)="picker.open()"
+    readonly
+    (dateChange)="onDateChange($event)"
+    placeholder="Choose a date"
+  />
+  <mat-datepicker #picker></mat-datepicker>
+</div>

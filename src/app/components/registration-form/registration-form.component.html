@@ -1,0 +1,140 @@
+<div class="registration-form">
+  <img class="registration-form__image" [src]="imageSrc" alt="sitting person" />
+  <form
+    class="registration-form__form"
+    (ngSubmit)="onSubmit(form)"
+    #form="ngForm"
+  >
+    <div class="registration-form__controls">
+      <div class="registration-form__control">
+        <label
+          class="registration-form__label"
+          [ngClass]="{
+            'registration-form__label--invalid':
+              firstName.invalid && firstName.touched
+          }"
+          for="first-name"
+          >First name</label
+        >
+        <input
+          class="registration-form__input"
+          type="text"
+          id="first-name"
+          placeholder="Input text"
+          required
+          minlength="2"
+          maxlength="30"
+          name="firstName"
+          ngModel
+          #firstName="ngModel"
+        />
+      </div>
+      <div class="registration-form__control">
+        <label
+          class="registration-form__label"
+          [ngClass]="{
+            'registration-form__label--invalid':
+              lastName.invalid && lastName.touched
+          }"
+          for="last-name"
+          >Last name</label
+        >
+        <input
+          class="registration-form__input"
+          type="text"
+          id="last-name"
+          placeholder="Input text"
+          required
+          minlength="2"
+          maxlength="30"
+          name="lastName"
+          ngModel
+          #lastName="ngModel"
+        />
+      </div>
+      <div class="registration-form__control">
+        <label
+          class="registration-form__label"
+          [ngClass]="{
+            'registration-form__label--invalid': email.invalid && email.touched
+          }"
+          for="email"
+          >Email</label
+        >
+        <input
+          class="registration-form__input"
+          type="email"
+          id="email"
+          placeholder="Input text"
+          required
+          email
+          name="email"
+          ngModel
+          #email="ngModel"
+        />
+      </div>
+      @if (role === 'trainer') {
+      <div class="registration-form__control">
+        <label
+          class="registration-form__label"
+          [ngClass]="{
+            'registration-form__label--invalid':
+              specialization.invalid && specialization.touched
+          }"
+          for="specialization"
+          >Specialization</label
+        >
+        <select
+          class="registration-form__input registration-form__input--select"
+          type="text"
+          id="specialization"
+          required
+          name="specializationId"
+          ngModel
+          #specialization="ngModel"
+        >
+          <option value="" disabled selected>Please select</option>
+          @for (spec of specializations$ | async; track $index) {
+          <option [value]="spec.id">{{ spec.specialization }}</option>
+          }
+        </select>
+      </div>
+      } @else if (role === 'student') {
+      <div class="registration-form__control">
+        <label class="registration-form__label" for="birth"
+          >Date of birth (optional)</label
+        >
+        <input
+          class="registration-form__input"
+          type="text"
+          id="birth"
+          placeholder="Input text"
+          name="dateOfBirth"
+          appDdmmyyyyValidator
+          ngModel
+        />
+      </div>
+      <div class="registration-form__control">
+        <label class="registration-form__label" for="address"
+          >Address (optional)</label
+        >
+        <input
+          class="registration-form__input"
+          type="text"
+          id="address"
+          placeholder="Input text"
+          name="address"
+          ngModel
+        />
+      </div>
+      }
+    </div>
+
+    <app-button class="registration-form__button" type="submit"
+      >Submit</app-button
+    >
+  </form>
+  @if (isLoading) {
+  <app-loading-spinner></app-loading-spinner>
+  }
+</div>

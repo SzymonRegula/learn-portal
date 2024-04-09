@@ -1,0 +1,153 @@
+@import "variables";
+
+.navigation {
+  &__username {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  &__email {
+    font-size: 12px;
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    font-size: 14px;
+  }
+
+  &__menu-item {
+    a {
+      padding: 13px 24px;
+      display: flex;
+      border-radius: $border-radius-m;
+    }
+
+    .active {
+      font-weight: 700;
+      color: $color-primary-500;
+    }
+  }
+
+  &__heading {
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__burger-icon {
+    position: absolute;
+    left: 24px;
+    color: $color-primary-500;
+    cursor: pointer;
+  }
+
+  &__opened-mobile {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 4px;
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+    background-color: $color-white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  &__user {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 26px;
+    object-fit: cover;
+    background: $color-primary-200;
+  }
+
+  &__close-icon {
+    align-self: flex-start;
+    margin-left: auto;
+    color: $color-primary-500;
+    cursor: pointer;
+  }
+
+  &__mobile-menu {
+    margin-bottom: auto;
+  }
+
+  &__mobile-menu-item {
+    a {
+      position: relative;
+      display: block;
+      padding: 16px;
+      font-size: 16px;
+      color: $color-neutral-600;
+    }
+
+    .active {
+      font-weight: 700;
+      color: $color-primary-500;
+
+      &::before {
+        content: "";
+        display: block;
+        width: 4px;
+        height: 100%;
+        background-color: $color-primary-500;
+        position: absolute;
+        left: -2px;
+        top: 0;
+      }
+    }
+  }
+
+  &__logout-btn {
+    display: flex;
+    gap: 8px;
+    padding: 16px;
+    font-size: 16px;
+    text-align: left;
+    color: $color-neutral-600;
+    background: $color-transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-primary-500;
+    }
+  }
+
+  &__login-buttons {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    gap: 8px;
+  }
+
+  &__login-btn {
+    height: 40px;
+  }
+
+  @media (max-width: $screen-sm) {
+    &__menu {
+      display: none;
+    }
+    &__heading {
+      display: flex;
+    }
+    &__opened-mobile {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

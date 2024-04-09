@@ -1,0 +1,97 @@
+@import "variables";
+
+.registration-form {
+  position: relative;
+  display: flex;
+
+  &__image {
+    width: 451px;
+    height: 625px;
+    margin-right: 96px;
+    border-radius: $border-radius-xl;
+  }
+
+  &__form {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  &__control {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 22px;
+
+    &--invalid {
+      color: $color-danger-500;
+    }
+  }
+
+  &__input {
+    height: 52px;
+    width: 100%;
+    padding: 0 20px;
+    font-size: 18px;
+    line-height: 28px;
+    background: $color-white;
+    border-radius: $border-radius-m;
+    border: 1px solid $color-neutral-500;
+
+    &:focus {
+      border-color: $color-primary-500;
+    }
+
+    &.ng-invalid.ng-touched {
+      border-color: $color-danger-500;
+      color: $color-danger-500;
+
+      &::placeholder {
+        color: $color-danger-500;
+      }
+    }
+
+    &--select {
+      padding-right: 52px;
+    }
+  }
+
+  &__button {
+    height: 52px;
+    font-size: 18px;
+  }
+
+  @media (max-width: $screen-md) {
+    &__image {
+      display: none;
+    }
+
+    &__form {
+      gap: 62px;
+    }
+  }
+
+  @media (max-width: $screen-sm) {
+    &__input {
+      height: 36px;
+      padding: 0 20px;
+      font-size: 16px;
+    }
+
+    &__button {
+      height: 46px;
+      font-size: 16px;
+    }
+  }
+}

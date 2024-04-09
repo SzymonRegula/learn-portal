@@ -1,0 +1,93 @@
+<div class="login-form">
+  <div class="login-form__heading-container">
+    <h2 class="login-form__heading">Sign In</h2>
+    <p class="login-form__heading-comment">Welcome back</p>
+  </div>
+  <form class="login-form__form" (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <div class="login-form__control">
+      <label for="username">User name</label>
+      <div class="login-form__input-container">
+        <fa-icon
+          class="login-form__input-icon login-form__input-icon--left"
+          [icon]="userIcon"
+        ></fa-icon>
+        <input
+          class="login-form__input login-form__input--username"
+          type="text"
+          id="username"
+          placeholder="Enter user name"
+          ngModel
+          name="username"
+          required
+          #username="ngModel"
+        />
+      </div>
+      @if (!username.valid && username.touched) {
+      <span class="login-form__text login-form__text--danger"
+        >User name is required.</span
+      >
+      }
+    </div>
+    <div class="login-form__control">
+      <label for="password">Password</label>
+      <div class="login-form__input-container">
+        <fa-icon
+          class="login-form__input-icon login-form__input-icon--left"
+          [icon]="lockIcon"
+        ></fa-icon>
+        <input
+          class="login-form__input login-form__input--password"
+          [type]="hidePassword ? 'password' : 'text'"
+          id="password"
+          placeholder="Enter password"
+          ngModel
+          name="password"
+          required
+          minlength="6"
+          #password="ngModel"
+        />
+        <fa-icon
+          class="login-form__input-icon login-form__input-icon--right"
+          [icon]="eyeIcon"
+          (click)="hidePassword = !hidePassword"
+        ></fa-icon>
+      </div>
+      @if (!password.valid && password.touched) {
+      <span class="login-form__text login-form__text--danger"
+        >Password is required.</span
+      >
+      }
+    </div>
+
+    <app-button class="login-form__button">Sign In</app-button>
+
+    <div class="login-form__text-box">
+      <p class="login-form__text login-form__text--bold">OR</p>
+      <p>
+        Don't have an account?
+        <a class="login-form__link" [routerLink]="joinUsPath">Sign up</a>
+      </p>
+    </div>
+
+    <div class="login-form__recaptcha-box">
+      <re-captcha
+        class="login-form__recaptcha"
+        (resolved)="resolved($event)"
+        [siteKey]="siteKey"
+        ngModel
+        name="captcha"
+        required
+        #captcha="ngModel"
+      ></re-captcha>
+      @if (!captcha.valid && captcha.touched) {
+      <span class="login-form__text login-form__text--danger"
+        >Confirmation is required.</span
+      >
+      }
+    </div>
+  </form>
+
+  @if (isLoading) {
+  <app-loading-spinner></app-loading-spinner>
+  }
+</div>

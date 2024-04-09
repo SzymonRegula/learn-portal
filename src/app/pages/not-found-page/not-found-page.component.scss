@@ -1,0 +1,13 @@
+@import "variables";
+
+.not-found-page {
+  text-align: center;
+  padding: 50px;
+
+  &__link {
+    color: $color-primary-600;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<header class="my-students__header">
+  <h2 class="my-students__heading">My Students</h2>
+</header>
+<table class="my-students__table">
+  <thead>
+    <tr>
+      <th>NAME</th>
+      <th>STATUS</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (student of myStudents$ | async; track student.id) {
+    <tr>
+      <td>{{ student.firstName }} {{ student.lastName }}</td>
+      <td
+        class="my-students__status"
+        [ngClass]="{ 'my-students__status--active': student.isActive }"
+      >
+        {{ student.isActive ? "ACTIVE" : "NOT ACTIVE" }}
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>

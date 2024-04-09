@@ -1,0 +1,29 @@
+<div class="registration-verification-page">
+  <h1 class="registration-verification-page__heading">Registration</h1>
+  <fa-icon
+    class="registration-verification-page__icon"
+    [icon]="checkIcon"
+    size="2x"
+  ></fa-icon>
+  <div class="registration-verification-page__text">
+    Congratulations, you have successfully registered with Learn Platform! here
+    is your credentials that you can change in your account.
+  </div>
+  <div class="registration-verification-page__credential-container">
+    <p class="registration-verification-page__credential-name">Username</p>
+    <p class="registration-verification-page__credential">
+      {{ (credentials$ | async)?.username }}
+    </p>
+  </div>
+  <div class="registration-verification-page__credential-container">
+    <p class="registration-verification-page__credential-name">Password</p>
+    <p class="registration-verification-page__credential">
+      {{ (credentials$ | async)?.password }}
+    </p>
+  </div>
+  <app-button
+    class="registration-verification-page__button"
+    [routerLink]="myAccountPath"
+    >My account</app-button
+  >
+</div>

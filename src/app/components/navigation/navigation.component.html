@@ -1,0 +1,88 @@
+<nav class="navigation">
+  @if (menuOpen) {
+  <aside class="navigation__opened-mobile" (appOutsideClick)="toggleMenu()">
+    @if (isAuthorized$ | async) {
+    <div class="navigation__user">
+      <img
+        [src]="(user$ | async)?.photo || 'assets/avatar.png'"
+        alt="username profile picture"
+        class="navigation__avatar"
+      />
+      <div>
+        <p class="navigation__username">
+          {{ (user$ | async)?.username }}
+        </p>
+        <p class="navigation__email">{{ (user$ | async)?.email }}</p>
+      </div>
+      <fa-icon
+        class="navigation__close-icon"
+        [icon]="closeMenuIcon"
+        size="xl"
+        (click)="toggleMenu()"
+      ></fa-icon>
+    </div>
+    }
+    <ul class="navigation__mobile-menu" (click)="toggleMenu()">
+      <li class="navigation__mobile-menu-item">
+        <a [routerLink]="blogPath" routerLinkActive="active">Blog</a>
+      </li>
+      <li class="navigation__mobile-menu-item">
+        <a [routerLink]="pricingPath" routerLinkActive="active">Pricing</a>
+      </li>
+      <li class="navigation__mobile-menu-item">
+        <a [routerLink]="aboutUsPath" routerLinkActive="active">About Us</a>
+      </li>
+      @if (isAuthorized$ | async) {
+      <li class="navigation__mobile-menu-item">
+        <a [routerLink]="myAccountPath" routerLinkActive="active">My Account</a>
+      </li>
+      }
+    </ul>
+    @if (isAuthorized$ | async) {
+    <button (click)="onLogout()" class="navigation__logout-btn" type="button">
+      <fa-icon [icon]="logoutIcon"></fa-icon>
+      <span>Sign out</span>
+    </button>
+    }@else {
+    <nav class="navigation__login-buttons">
+      <app-button
+        class="navigation__login-btn"
+        [routerLink]="loginPath"
+        styleType="prime-transparent"
+        type="button"
+        (click)="toggleMenu()"
+        >Sign in</app-button
+      >
+      <app-button
+        class="navigation__login-btn"
+        [routerLink]="joinUsPath"
+        type="button"
+        (click)="toggleMenu()"
+        >Join us</app-button
+      >
+    </nav>
+    }
+  </aside>
+  } @else {
+  <div class="navigation__heading">
+    <fa-icon
+      class="navigation__burger-icon"
+      [icon]="burgerMenuIcon"
+      size="xl"
+      (click)="toggleMenu(); $event.stopPropagation()"
+    ></fa-icon>
+    <app-logo></app-logo>
+  </div>
+  }
+  <ul class="navigation__menu">
+    <li class="navigation__menu-item">
+      <a [routerLink]="blogPath" routerLinkActive="active">Blog</a>
+    </li>
+    <li class="navigation__menu-item">
+      <a [routerLink]="pricingPath" routerLinkActive="active">Pricing</a>
+    </li>
+    <li class="navigation__menu-item">
+      <a [routerLink]="aboutUsPath" routerLinkActive="active">About Us</a>
+    </li>
+  </ul>
+</nav>

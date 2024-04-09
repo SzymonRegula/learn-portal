@@ -1,0 +1,11 @@
+<div class="home-page">
+  @for (box of boxes; track $index) {
+  <app-box
+    [imageSrc]="box.imageSrc"
+    [tag]="box.tag"
+    [title]="box.title"
+    [date]="box.date"
+    [time]="box.time"
+  ></app-box>
+  }
+</div>

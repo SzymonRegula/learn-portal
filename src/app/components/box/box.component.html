@@ -1,0 +1,11 @@
+<div class="box">
+  <img class="box__image" [src]="imageSrc" [alt]="title" />
+  <div class="box__info">
+    <p class="box__tag">{{ tag }}</p>
+    <h3 class="box__title">{{ title }}</h3>
+    <div class="box__time">
+      <span class="box__date">{{ date | customDate : "month dd, yyyy" }}</span>
+      <span class="box__duration">{{ time }} mins read</span>
+    </div>
+  </div>
+</div>

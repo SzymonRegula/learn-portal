@@ -1,0 +1,96 @@
+<div class="training-page">
+  <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
+  <h1 class="training-page__heading">Trainings</h1>
+  @if ((tokenPayload$ | async)?.role ; as role) { @if (role === 'student') {
+  <app-button
+    class="training-page__button"
+    [routerLink]="addTrainingPath"
+    styleType="secondary"
+    >Add training</app-button
+  >
+  }
+  <section class="training-page__search-section">
+    <h2 class="training-page__subheading">Search Trainings</h2>
+    <form (ngSubmit)="onSearch(form)" #form="ngForm">
+      <div class="training-page__controls">
+        <div class="training-page__text-inputs">
+          @if (role === 'student' ) {
+          <div class="training-page__control">
+            <label for="trainerName">Trainer name</label>
+            <div class="training-page__input-container">
+              <input
+                class="training-page__input"
+                type="text"
+                id="trainerName"
+                placeholder="Name"
+                ngModel
+                name="trainerName"
+                #trainerName="ngModel"
+              />
+            </div>
+          </div>
+
+          <div class="training-page__control">
+            <label for="specialization">Specialization</label>
+            <div class="training-page__input-container">
+              <input
+                class="training-page__input"
+                type="text"
+                id="specialization"
+                placeholder="Specialization"
+                ngModel
+                name="specialization"
+                #specialization="ngModel"
+              />
+            </div>
+          </div>
+          } @if (role === 'trainer' ) {
+          <div class="training-page__control">
+            <label for="studentName">Student name</label>
+            <div class="training-page__input-container">
+              <input
+                class="training-page__input"
+                type="text"
+                id="studentName"
+                placeholder="Name"
+                ngModel
+                name="studentName"
+                #trainerName="ngModel"
+              />
+            </div>
+          </div>
+          }
+        </div>
+
+        <div class="training-page__dates">
+          <div class="training-page__control">
+            <label for="from">From</label>
+            <div class="training-page__input-container">
+              <app-date-picker
+                [id]="'from'"
+                class="training-page__date-picker"
+                (dateChange)="onDateFromChange($event)"
+              ></app-date-picker>
+            </div>
+          </div>
+          <div class="training-page__control">
+            <label for="to">To</label>
+            <div class="training-page__input-container">
+              <app-date-picker
+                [id]="'to'"
+                class="training-page__date-picker"
+                (dateChange)="onDateToChange($event)"
+              ></app-date-picker>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-button class="training-page__button">Search</app-button>
+    </form>
+  </section>
+  }
+  <section>
+    <h2 class="training-page__subheading">My passed trainings</h2>
+    <app-table></app-table>
+  </section>
+</div>

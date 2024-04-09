@@ -1,0 +1,64 @@
+@import "variables";
+
+.registration-verification-page {
+  margin-top: 120px;
+  margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__heading {
+    font-family: $font-family-secondary;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 68px;
+    margin-bottom: 24px;
+    color: $color-neutral-900;
+  }
+
+  &__icon {
+    width: 74px;
+    height: 74px;
+    border-radius: 37px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $color-white;
+    background-color: $color-tertiary3-600;
+  }
+
+  &__text {
+    max-width: 460px;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center;
+    margin-bottom: 8px;
+    color: $color-neutral-900;
+  }
+
+  &__credential-container {
+    margin-bottom: 8px;
+    color: $color-neutral-900;
+    text-align: center;
+  }
+
+  &__credential-name {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    color: $color-neutral-900;
+  }
+
+  &__credential {
+    font-size: 16px;
+    line-height: 26px;
+    background: $color-white;
+  }
+
+  &__button {
+    margin-top: 38px;
+    height: 52px;
+    font-size: 18px;
+  }
+}

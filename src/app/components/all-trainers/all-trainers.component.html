@@ -1,0 +1,29 @@
+<header class="all-trainers__header">
+  <h2 class="all-trainers__heading">All Trainers</h2>
+</header>
+<table class="all-trainers__table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>NAME</th>
+      <th>SPECIALIZATION</th>
+    </tr>
+  </thead>
+  <tbody [formGroup]="form">
+    @for (trainer of notMyTrainers$ | async; track trainer.id) {
+    <tr>
+      <td>
+        <mat-checkbox
+          [formControlName]="trainer.id"
+          color="primary"
+        ></mat-checkbox>
+      </td>
+      <td>{{ trainer.firstName }} {{ trainer.lastName }}</td>
+      <td>{{ trainer.specialization }}</td>
+    </tr>
+    }
+  </tbody>
+</table>
+<app-button (click)="addTrainersHandler()" class="all-trainers__button"
+  >Add</app-button
+>
