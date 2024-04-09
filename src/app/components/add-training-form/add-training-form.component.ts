@@ -78,7 +78,6 @@ export class AddTrainingFormComponent {
       description: this.form.value.description || '',
     };
 
-    console.log(newTraining);
     this.trainingService.addTraining(newTraining).subscribe({
       next: () => {
         this.toastr.success('Training added successfully');
