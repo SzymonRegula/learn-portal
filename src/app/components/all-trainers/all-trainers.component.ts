@@ -10,7 +10,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { Subscription, first, forkJoin, switchMap, tap } from 'rxjs';
+import { Subscription, concatMap, from, last, switchMap, tap } from 'rxjs';
 import { UserService } from '../../user/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -58,14 +58,14 @@ export class AllTrainersComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const addTrainersObservable$ = trainerIds.map((trainerId) =>
-      this.userService.addTrainer(trainerId)
-    );
-
-    forkJoin(addTrainersObservable$)
+    from(trainerIds)
       .pipe(
-        first(),
-        tap(() => this.toastr.success('Added successfully!')),
+        concatMap((trainerId) => this.userService.addTrainer(trainerId)),
+        last(),
+        tap(() => {
+          console.log('Added successfully!');
+          this.toastr.success('Added successfully!');
+        }),
         switchMap(() => this.userService.getUser())
       )
       .subscribe({
